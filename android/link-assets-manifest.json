@@ -1,0 +1,49 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/FiraCode-Bold.ttf",
+      "sha1": "45dab138e16846d4a8229207605428800e441c64"
+    },
+    {
+      "path": "assets/fonts/FiraCode-Light.ttf",
+      "sha1": "5def22a619172f3975e9b87e1c9e2ab0cb51f9eb"
+    },
+    {
+      "path": "assets/fonts/FiraCode-Medium.ttf",
+      "sha1": "d1a50c892ddb092621e6ff677acb462a58f26e2c"
+    },
+    {
+      "path": "assets/fonts/FiraCode-Regular.ttf",
+      "sha1": "8530335bb596211350eae108e9844352fcc3dcab"
+    },
+    {
+      "path": "assets/fonts/FiraCode-SemiBold.ttf",
+      "sha1": "b9343cd68d71e08cc12c4cb61f32504170babacf"
+    },
+    {
+      "path": "assets/fonts/Italianno-Regular.ttf",
+      "sha1": "1d0fca4d186f74e1567d7aef33998fea1d837284"
+    },
+    {
+      "path": "assets/fonts/Laila-Bold.ttf",
+      "sha1": "a7964791f62250f90cff8e805bdccafd9ed325cc"
+    },
+    {
+      "path": "assets/fonts/Laila-Light.ttf",
+      "sha1": "157903c58679e1b8e71ca515e7e001fba722d05f"
+    },
+    {
+      "path": "assets/fonts/Laila-Medium.ttf",
+      "sha1": "78748dfe35a05eb316dacb93d41541339b9502f1"
+    },
+    {
+      "path": "assets/fonts/Laila-Regular.ttf",
+      "sha1": "fab8dcdeacb178dd7a1eccc76768bd810b7d5f1d"
+    },
+    {
+      "path": "assets/fonts/Laila-SemiBold.ttf",
+      "sha1": "960988f7ded06a8580ed5b87543356c76eb5eeaa"
+    }
+  ]
+}
