@@ -67,7 +67,7 @@ const HomeScreen = () =>{
             </View>
             <Text style = {{ fontSize: 21, fontFamily: 'Laila-Medium', color: 'black'}}> Categories </Text>
 
-            <View style = {{height: '15%', width: '30%', marginLeft: 20, borderRadius: 20}}>
+            <View style = {{height: '15%', width: '30%', marginLeft: 20, borderRadius: 2}}>
             <Image  source={require('../images/sofa2.png')}  style = {{height:'100%', width: '100%', resizeMode:'contain'}}/>
             </View>
             
