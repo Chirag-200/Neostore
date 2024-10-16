@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Image, Text, View, Dimensions } from 'react-native'
+import { Image, Text, View, Dimensions, TextInput } from 'react-native'
 import NeoStoreLogo from '../../assets/logo/logo'
 import GroupImages from '../../images/GroupImages'
 
@@ -53,6 +53,26 @@ const TextInputComponent = () => {
         <Text style={{
                 fontSize: 28, color: 'black', fontFamily: 'Laila-Bold' }}> Hello, User </Text>
             <Text style={{ fontFamily: 'FiraCode-Regular' }}> hello hello user user</Text>
+
+
+            <Text>
+                FORGET PASSWORD 
+             </Text>
+
+            <TextInput
+            placeholder = 'Enter Email'
+
+            
+            
+            />
+
+            <TextInput 
+            placeholder = " Enter Phone Number "
+            />
+
+            <Text>
+                
+            </Text>
         </View>
        </>
     )
