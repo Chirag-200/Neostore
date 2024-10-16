@@ -71,29 +71,33 @@ const RegisterScreen = () => {
 
 
     try {
-      //   let result = await axios.post(
-      //     'http://staging.php-dev.in:8844/trainingapp/api/users/register',
-      //         formData,
-      //     {
-      //       headers: {
-      //         'Content-Type': 'multipart/form-data'
-      //       }
-      //     }
-      //   )
-      let result = await axios({
-        method: 'POST',
-        url: 'http://staging.php-dev.in:8844/trainingapp/api/users/register',
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      let abcd = result.data.data.access_token
-      console.log("the result === ", abcd)
-    }
+        let result = await axios.post(
+          'http://staging.php-dev.in:8844/trainingapp/api/users/register',
+              formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+
+        console.log("result",result?.data)
+    //   let result = await axios({
+    //     method: 'POST',
+    //     url: 'http://staging.php-dev.in:8844/trainingapp/api/users/register',
+    //     data: formData,
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data'
+    //     }
+    //   })
+    //   let abcd = result.data.data.access_token
+    //   console.log("the result === ", abcd)
+      } 
     catch (error) {
-      console.log(error)
+      console.log("error",error)
     }
+  
+  
 
 
 

@@ -40,13 +40,13 @@ const AllScreens = () => {
                     headerShown: false
                 }} >
                 {/* <Stack.Screen name='Register' component={RegisterScreen}></Stack.Screen> */}
-                {/* <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen> */}
+                <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
 
 
 
-                {/* <Stack.Screen name= 'ForgetPassword' component={ForgetPassword}></Stack.Screen> */}
+                <Stack.Screen name= 'ForgetPassword' component={ForgetPassword}></Stack.Screen>
 
-                <Stack.Screen name='Home' component={HomeScreen} />
+                {/* <Stack.Screen name='Home' component={HomeScreen} /> */}
 
                 {/* <Stack.Screen name = "Main" component = {TabNavigator} /> */}
 
