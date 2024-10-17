@@ -1,81 +1,114 @@
 
-import React, { useState } from 'react'
-import { Image, Text, View, Dimensions, TextInput } from 'react-native'
-import NeoStoreLogo from '../../assets/logo/logo'
-import GroupImages from '../../images/GroupImages'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from 'react';
+import { Image, Text, View, Dimensions, TouchableOpacity } from 'react-native';
+import GroupImages from '../../images/GroupImages';
+import { TextInput } from 'react-native-paper';
+import axios from 'axios';
 
 const TextInputComponent = () => {
-    const imageLoc = require('/Users/neosoft1/Documents/NEOSTORE/neostore/src/images/bubble01.png')
+    const { width, height } = Dimensions.get('window');
+    const [email, setEmail] = useState('');
 
-    // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+    const handleSubmit = async () => {
+        const formData = new FormData();
+        formData.append('email', email);
 
-    // const handleImageLoad = (event) => {
-    //   const { width, height } = event.nativeEvent.source;
-    //   setDimensions({ width, height });
-    //   console.log('Width:', width);
-    //   console.log('Height:', height);
-    // };
-    const { width, height } = Dimensions.get('window')
-    // console.log("width===>", width)
-    // console.log('height==>', height)
+        try {
+            const result = await axios.post('http://staging.php-dev.in:8844/trainingapp/api/users/forgot', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log( 'result',result.data);
+            // Handle success (e.g., show a success message)
+        } catch (error) {
+            console.error('Error:', error.response);
+            // Handle error (e.g., show an error message)
+        }
+    };
+
     return (
-       <>
-        <View>
-            {/* <View style={{ }}>
-                <Image source={GroupImages.Bubble2} style={{position: "absolute",  height:'100%',width:'81.5%'}}  />
-                <Image source={GroupImages.Bubble1} style = {{height:'79.5%',width:'65%'}}  />
-            </View> */}
-
-<View style={{ flex: 1 }}>
+        <>
+            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
             <Image 
                 source={GroupImages.Bubble2} 
                 style={{ 
-                    position: 'absolute', 
+                    
                     // height: height * 0.48, // 90% of the screen height
                     // width: width * 0.88 // 81.5% of the screen width
                 }} 
             />
             <Image 
                 source={GroupImages.Bubble1} 
+                style = {{ position : 'absolute'}}
                 // style={{ 
                 //     height: height * 0.4, // 79.5% of the screen height
                 //     width: width * 0.75 // 65% of the screen width
                 // }} 
             />
         </View>
-
-            {/* <NeoStoreLogo /> */}
-
-          
-
         </View>
-        <View style={{position:'absolute',top:300,backgroundColor:'red'}}>
-        <Text style={{
-                fontSize: 28, color: 'black', fontFamily: 'Laila-Bold' }}> Hello, User </Text>
-            <Text style={{ fontFamily: 'FiraCode-Regular' }}> hello hello user user</Text>
 
+            <View>
+                <Text style={{
+                    fontSize: 28, color: 'black', fontFamily: 'Laila-Bold', 
+                    marginLeft: width * 0.3, marginTop: height * 0.4
+                }}> 
+                    Hello, User 
+                </Text>
 
-            <Text>
-                FORGET PASSWORD 
-             </Text>
+                <Text style={{
+                    marginTop: height * 0.05, 
+                    marginLeft: width * 0.2
+                }}>
+                    Enter your Email for Verification 
+                </Text>
 
-            <TextInput
-            placeholder = 'Enter Email'
+                <TextInput 
+                    label='Email'
+                    mode='outlined'
+                    activeOutlineColor='blue'
+                    left={<TextInput.Icon color={'blue'} size={30} icon={'email'} />}
+                    style={{ margin: 20 }}
+                    onChangeText={setEmail}
+                />
 
-            
-            
-            />
+                <TouchableOpacity onPress={handleSubmit}>
+                    <Text style={{
+                        textAlign: 'center',
+                        fontSize: 20,
+                        margin: 20,
+                        backgroundColor: 'rgb(15,84,251)',
+                        padding: 10,
+                        borderRadius: 50,
+                        color: 'white',
+                        fontFamily: 'Laila-Regular'
+                    }}>
+                        Submit 
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </>
+    );
+};
 
-            <TextInput 
-            placeholder = " Enter Phone Number "
-            />
-
-            <Text>
-                
-            </Text>
-        </View>
-       </>
-    )
-}
-
-export default TextInputComponent
+export default TextInputComponent;

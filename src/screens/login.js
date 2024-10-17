@@ -3,14 +3,12 @@ import {
     View,
     Text,
     ScrollView,
-    
     TouchableOpacity,
     Alert,
     Image,
 } from 'react-native';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
-
 
 const LoginScreen = (props) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -40,14 +38,21 @@ const LoginScreen = (props) => {
             setPasswordError('');
         }
     };
-    async function LoginpostData() {
+
+    const LoginpostData = async () => {
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('password', password);
+
         try {
             console.log('Sending login request with:', { email, password });
 
             const result = await axios.post(
                 'http://staging.php-dev.in:8844/trainingapp/api/users/login',
-                { email, password },
-                { headers: { 'Content-Type': 'application/json' } }
+                formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                }
             );
 
             console.log('Response Data:', result.data);
@@ -64,9 +69,9 @@ const LoginScreen = (props) => {
                 Alert.alert('Error', 'An error occurred. Please try again later.');
             }
         }
-    }
+    };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         validateEmail();
         validatePassword();
 
@@ -75,16 +80,14 @@ const LoginScreen = (props) => {
             return;
         }
 
-        LoginpostData();
+        await LoginpostData();
     };
-
-  
 
     return (
         <ScrollView style={{ backgroundColor: 'white' }}>
             <View style={{ position: 'relative', width: 200, height: 200 }}>
-                <Image source={require('../images/bubble02.png')} style={{ position: 'absolute' }} />
-                <Image source={require('../images/bubble01.png')} style={{ position: 'absolute' }} />
+                <Image source={require('../images/bubble02.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
+                <Image source={require('../images/bubble01.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
             </View>
             <Image source={require('../images/bubblle03.png')} style={{ marginLeft: 324 }} />
 
@@ -112,6 +115,7 @@ const LoginScreen = (props) => {
                     left={<TextInput.Icon color='#0030FF' icon='account-lock-outline' size={30} />}
                     right={<TextInput.Icon color='blue' icon='eye-off' size={30} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
+                    secureTextEntry
                     onChangeText={setPassword}
                     onBlur={validatePassword}
                 />
