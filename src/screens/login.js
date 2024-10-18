@@ -1,73 +1,73 @@
-import React, { useState } from 'react';
-import {
-    View,
-    Text,
-    ScrollView,
-    TouchableOpacity,
-    Alert,
-    Image,
-} from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, Alert, Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
+import { AuthContext } from '../AuthContext';
 
-const LoginScreen = (props) => {
+const LoginScreen = ({ navigation }) => {
+    const { login } = useContext(AuthContext); 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]*$/;
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [passwordError, setPasswordError] = useState('');
+    // Initial state with default values for email and password
+    const initialState = {
+        email: 'mytest@gmail.com', // Initial email value
+        password: '#Email@1234', // Initial password value
+        emailError: '',
+        passwordError: ''
+    };
+
+    const [formData, setFormData] = useState(initialState);
 
     const validateEmail = () => {
-        if (!email) {
-            setEmailError('Email is required.');
-        } else if (!emailRegex.test(email)) {
-            setEmailError('Please enter a valid email address.');
+        if (!formData.email) {
+            setFormData(prev => ({ ...prev, emailError: 'Email is required.' }));
+        } else if (!emailRegex.test(formData.email)) {
+            setFormData(prev => ({ ...prev, emailError: 'Please enter a valid email address.' }));
         } else {
-            setEmailError('');
+            setFormData(prev => ({ ...prev, emailError: '' }));
         }
     };
 
     const validatePassword = () => {
-        if (!password) {
-            setPasswordError('Password is required.');
-        } else if (password.length < 8 || !passwordRegex.test(password)) {
-            setPasswordError('Password must be at least 8 characters and include a mix of letters, numbers, and special characters.');
+        if (!formData.password) {
+            setFormData(prev => ({ ...prev, passwordError: 'Password is required.' }));
+        } else if (formData.password.length < 8 || !passwordRegex.test(formData.password)) {
+            setFormData(prev => ({ ...prev, passwordError: 'Password must be at least 8 characters and include a mix of letters, numbers, and special characters.' }));
         } else {
-            setPasswordError('');
+            setFormData(prev => ({ ...prev, passwordError: '' }));
         }
     };
 
-    const LoginpostData = async () => {
-        const formData = new FormData();
-        formData.append('email', email);
-        formData.append('password', password);
+    const loginUser = async () => {
+        const formDataToSend = new FormData();
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('password', formData.password);
 
         try {
-            console.log('Sending login request with:', { email, password });
-
-            const result = await axios.post(
+            const response = await axios.post(
                 'http://staging.php-dev.in:8844/trainingapp/api/users/login',
-                formData,
-                {
-                    headers: { 'Content-Type': 'multipart/form-data' }
-                }
+                formDataToSend,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
             );
 
-            console.log('Response Data:', result.data);
-            if (result.status === 200) {
+            if (response.status === 200) {
+                
                 Alert.alert('Login Successful');
-                props.navigation.navigate('HomeScreen');
+                login(); 
+             
+
+                navigation.navigate('Main'); 
+                // console.log(response.data.data.acc)
+                const accessToken = response?.data?.data?.access_token;
+                await AsyncStorage.setItem('access_token', accessToken);
+                console.log(accessToken)
             }
+            
         } catch (error) {
-            console.error('Error:', error);
-            if (error.response) {
-                console.log('Error response:', error.response.data);
-                Alert.alert('Error', error.response.data.message || 'Login Failed. Please try again later.');
-            } else {
-                Alert.alert('Error', 'An error occurred. Please try again later.');
-            }
+            const message = error.response || 'Login Failed. Please try again later.';
+            Alert.alert('Error', message);
         }
     };
 
@@ -75,12 +75,12 @@ const LoginScreen = (props) => {
         validateEmail();
         validatePassword();
 
-        if (emailError || passwordError) {
+        if (formData.emailError || formData.passwordError) {
             Alert.alert('Please enter correct details');
             return;
         }
 
-        await LoginpostData();
+        await loginUser();
     };
 
     return (
@@ -103,10 +103,11 @@ const LoginScreen = (props) => {
                     activeOutlineColor='blue'
                     left={<TextInput.Icon color='#0030FF' icon='email' size={30} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
-                    onChangeText={setEmail}
+                    value={formData.email} // Bind value here
+                    onChangeText={(text) => setFormData(prev => ({ ...prev, email: text }))}
                     onBlur={validateEmail}
                 />
-                {emailError ? <Text style={{ color: 'red' }}>{emailError}</Text> : null}
+                {formData.emailError ? <Text style={{ color: 'red' }}>{formData.emailError}</Text> : null}
 
                 <TextInput
                     label='Password'
@@ -116,27 +117,28 @@ const LoginScreen = (props) => {
                     right={<TextInput.Icon color='blue' icon='eye-off' size={30} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
                     secureTextEntry
-                    onChangeText={setPassword}
+                    value={formData.password} // Bind value here
+                    onChangeText={(text) => setFormData(prev => ({ ...prev, password: text }))}
                     onBlur={validatePassword}
                 />
-                {passwordError ? <Text style={{ color: 'red' }}>{passwordError}</Text> : null}
+                {formData.passwordError ? <Text style={{ color: 'red' }}>{formData.passwordError}</Text> : null}
             </View>
 
-            <View style={{ alignItems: 'center', margin: 20, padding: 2, borderRadius: 50, backgroundColor: '#0030FF', marginBottom: 0 }}>
-                <TouchableOpacity onPress={handleSubmit}>
-                    <Text style={{ fontSize: 20, color: 'white' }}>Sign In</Text>
+            <View style={{ marginLeft: 20, marginRight: 20 }}>
+                <TouchableOpacity onPress={handleSubmit} style={{ padding: 10, backgroundColor: '#0030FF', borderRadius: 50 }}>
+                    <Text style={{ fontSize: 20, color: 'white', textAlign:'center' }}>Sign In</Text>
                 </TouchableOpacity>
             </View>
 
             <View>
-                <Text style={{ fontSize: 14, textAlign: 'right', marginRight: 20, color: '#0030FF' }} onPress={() => props.navigation.navigate('ForgetPassword')}>
+                <Text style={{ fontSize: 14, textAlign: 'right', marginRight: 20, color: '#0030FF' }} onPress={() => navigation.navigate('ForgetPassword')}>
                     Forget Password?
                 </Text>
             </View>
 
             <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
                 <Text>Don't have an account?</Text>
-                <Text style={{ color: '#0030FF' }} onPress={() => props.navigation.navigate('Register')}> Register</Text>
+                <Text style={{ color: '#0030FF' }} onPress={() => navigation.navigate('Register')}> Register</Text>
             </View>
         </ScrollView>
     );

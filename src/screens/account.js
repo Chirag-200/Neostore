@@ -8,7 +8,7 @@ const AccountScreenQ = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View >
             <Text style={styles.title}>Profile</Text>
 
             <View style={styles.table}>
@@ -18,10 +18,10 @@ const AccountScreenQ = ({ navigation }) => {
                         handlePress('Update Details');
                         navigation.navigate('UpdateDetails');
                     }}
-                    activeOpacity={0.7}
+                    activeOpacity={0.99}
                     accessibilityLabel="Update Details"
                 >
-                    <Icon name="person-outline" size={24} color="gray" />
+                    <Icon name="person-outline" size={24} color="blue" />
                     <Text style={styles.cell}>Update Details</Text>
                     <Text style={styles.arrow}>{' >'}</Text>
                 </TouchableOpacity>
@@ -35,7 +35,7 @@ const AccountScreenQ = ({ navigation }) => {
                     activeOpacity={0.7}
                     accessibilityLabel="Change Password"
                 >
-                    <Icon name="lock-outline" size={24} color="gray" />
+                    <Icon name="lock-outline" size={24} color="blue" />
                     <Text style={styles.cell}>Change Password</Text>
                     <Text style={styles.arrow}>{' >'}</Text>
                 </TouchableOpacity>
@@ -59,29 +59,33 @@ const styles = StyleSheet.create({
     table: {
         marginTop: 20,
         borderWidth: 1,
-        borderColor: 'gray',
+
+        borderColor: 'black',
         borderRadius: 15,
         overflow: 'hidden',
-        marginLeft: 10,
+        marginLeft: 15,
+        marginRight: 15
     },
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 15,
+        padding: 10,
         backgroundColor: 'white',
     },
     cell: {
         fontSize: 16,
         marginLeft: 10,
         flex: 1,
+        color: 'black',
+        fontFamily: 'Laila-Regular'
     },
     arrow: {
         fontSize: 25,
-        color: 'gray',
+        color: 'black',
     },
     separator: {
         height: 1,
-        backgroundColor: 'gray',
+        backgroundColor: 'black',
     },
 });
 
