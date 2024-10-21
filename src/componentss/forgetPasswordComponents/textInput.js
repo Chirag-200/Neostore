@@ -1,22 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState } from 'react';
 import { Image, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import GroupImages from '../../images/GroupImages';

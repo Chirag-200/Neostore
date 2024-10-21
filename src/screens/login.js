@@ -61,8 +61,9 @@ const LoginScreen = ({ navigation }) => {
                 navigation.navigate('Main'); 
                 // console.log(response.data.data.acc)
                 const accessToken = response?.data?.data?.access_token;
-                await AsyncStorage.setItem('access_token', accessToken);
-                console.log(accessToken)
+                // console.log(accessToken)
+             AsyncStorage.setItem('access_token', accessToken);
+                // console.log(typeof accessToken)
             }
             
         } catch (error) {

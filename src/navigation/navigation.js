@@ -15,6 +15,7 @@ import HomeIcon from 'react-native-vector-icons/Entypo';
 import AccountIcon from 'react-native-vector-icons/Entypo';
 import SearchIcon from 'react-native-vector-icons/Entypo'; 
 import CartIcon from 'react-native-vector-icons/Entypo'; 
+import Products from '../screens/products';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,6 +25,7 @@ function AccountStack() {
         <Stack.Navigator>
             <Stack.Screen name="Account" component={AccountScreenQ} options={{ headerShown: false }} />
             <Stack.Screen name="UpdateDetails" component={UpdateDetails} options={{ title: 'Update Details', headerTitleAlign: 'center' }} />
+
         </Stack.Navigator>
     );
 }
@@ -73,6 +75,11 @@ function TabNavigator() {
                     tabBarLabel: 'Account',
                     headerShown:false 
                 }}
+            />
+             <Tab.Screen
+                name='Products'
+                component={Products}
+                options={{ tabBarButton: () => null , headerShown: false}} // Hide the tab button if not needed
             />
         </Tab.Navigator>
     );
