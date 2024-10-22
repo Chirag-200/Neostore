@@ -23,11 +23,11 @@
 //     const fetchProductData = async () => {
 //       try {
 //         const response = await fetch(`http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=${product_id}`);
-        
+
 //         if (!response.ok) {
 //           throw new Error("Response Not OK");
 //         }
-        
+
 //         const data = await response.json();
 //         console.log('API Response:', data);
 //         setProductData(data); 
@@ -157,11 +157,11 @@
 // //     const fetchProductData = async () => {
 // //       try {
 // //         const response = await fetch(`http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=${product_id}`);
-        
+
 // //         if (!response.ok) {
 // //           throw new Error("Response Not OK");
 // //         }
-        
+
 // //         const data = await response.json();
 // //         setProductData(data); 
 // //         // console.log(data?.data[0]?.name)
@@ -198,7 +198,7 @@
 
 // //                   <View style = {{flexDirection:"column"}}>
 // //                   <Text style = {{marginLeft: 20}}> LUNA </Text>
-                  
+
 
 // //                   <Text style={{ alignSelf: 'center', marginTop: height * 0.02, fontSize: 18, color: 'black', fontFamily: 'Laila-Regular', marginLeft: width*0.07 }} > {productData?.data[0]?.name}</Text>
 // //               </View>
@@ -206,8 +206,8 @@
 // //               <Text> {productData?.data[0]?.view_count}</Text>
 // //               <Text> {productData?.data[0]?.producer}</Text>
 // //               </View>
-         
-      
+
+
 // //     </View>
 // //   );
 // // };
@@ -243,7 +243,7 @@
 //       const accessToken = await AsyncStorage.getItem('access_token');
 //       console.log("aaaaa",accessToken)
 
-  
+
 //         let result = await axios.get(
 //           `http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=1&page=${page}`,
 //           {
@@ -255,9 +255,9 @@
 
 //         setoutput(prevOutput => [...prevOutput, ...result.data.data]);
 //         setPage(prevPage => prevPage + 1);
-     
+
 //         Alert.alert('Error');
-      
+
 //     } catch (error) {
 //       console.log(error.response ? error.response.data : error.message);
 //     }
@@ -616,161 +616,271 @@
 
 
 
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-  Alert,
-} from 'react-native';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { StarRatingDisplay } from 'react-native-star-rating-widget';
-import { AirbnbRating } from 'react-native-ratings';
+// import React, { useEffect, useState } from 'react';
+// import {
+//   View,
+//   Text,
+//   FlatList,
+//   Image,
+//   TouchableOpacity,
+//   ActivityIndicator,
+//   Alert,
+// } from 'react-native';
+// import axios from 'axios';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { AirbnbRating } from 'react-native-ratings';
 
-const ProductList = (props) => {
-  const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showSeeMoreButton, setShowSeeMoreButton] = useState(false);
-  const [rating , setRating] = useState()
+// const ProductList = ({ route, navigation }) => {
+//   const productId = route?.params?.productId; // Access the productId
+//   console.log("Product ID:", productId); // Check the value of productId
+//   const [products, setProducts] = useState([]);
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [showSeeMoreButton, setShowSeeMoreButton] = useState(false);
+//   const [rating, setRating] = useState();
 
-  async function fetchProducts() {
-    try {
-      const accessToken = await AsyncStorage.getItem('access_token');
-      const response = await axios.get(
-        `http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=1&page=${currentPage}`,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
+//   async function fetchProducts() {
+//     try {
+//       const accessToken = await AsyncStorage.getItem('access_token');
+//       const response = await axios.get(
+//         `http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=${productId}&page=${currentPage}`,
+//         {
+//           headers: {
+//             'Content-Type': 'multipart/form-data',
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       );
 
-      setProducts((prevProducts) => [...prevProducts, ...response.data.data]);
-      setCurrentPage((prevPage) => prevPage + 1);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.response ? error.response.data : error.message);
-      Alert.alert('Error fetching data');
-      setIsLoading(false);
-    }
+//       setProducts((prevProducts) => [...prevProducts, ...response.data.data]);
+//       setCurrentPage((prevPage) => prevPage + 1);
+//       setIsLoading(false);
+//     } catch (error) {
+//       console.log(error.response ? error.response.data : error.message);
+//       Alert.alert('Error fetching data');
+//       setIsLoading(false);
+//     }
+//   }
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, []);
+
+//   const renderProductItem = ({ item }) => (
+//     <TouchableOpacity
+//       onPress={() => {
+//         navigation.navigate('ProductDetails', { id: item.id });
+//       }}
+//       style={{
+//         flexDirection: 'row',
+//         borderWidth: 1,
+//         borderColor: '#ddd',
+//         borderRadius: 12,
+//         backgroundColor: 'white',
+//         marginVertical: 10,
+//         marginHorizontal: 16,
+//         overflow: 'hidden',
+//         shadowColor: '#000',
+//         shadowOffset: { width: 0, height: 2 },
+//         shadowOpacity: 0.1,
+//         shadowRadius: 5,
+//         elevation: 4,
+//         padding: 10,
+//       }}
+//     >
+//       <Image
+//         style={{
+//           height: 80,
+//           width: 120,
+//           borderRadius: 8,
+//           marginRight: 10,
+//         }}
+//         source={{ uri: item.product_images }}
+//       />
+//       <View style={{ flex: 1 }}>
+//         <Text>{item.producer}</Text>
+//         <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 }}>
+//           {item.name}
+//         </Text>
+//         <AirbnbRating
+//           count={5}
+//           defaultRating={rating}
+//           onFinishRating={(rate) => setRating(rate)}
+//           size={16}
+//           showRating={false}
+//         />
+//         <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'baseline', marginTop: 10 }}>
+//           <Text style={{ color: '#2E6BC6', fontWeight: 'bold', fontSize: 18 }}>
+//             {`₹${item.cost}`}
+//           </Text>
+//           <Text style={{ color: '#A4A4A4', textDecorationLine: 'line-through', fontSize: 16, marginLeft: 10 }}>
+//             {`₹${item.cost}`}
+//           </Text>
+//         </View>
+//         <Text style={{ marginTop: 5, fontSize: 14, color: '#555' }} numberOfLines={1} ellipsizeMode="tail">
+//           {item.description}
+//         </Text>
+//       </View>
+//     </TouchableOpacity>
+//   );
+
+//   return (
+//     <View style={{ flex: 1, backgroundColor: 'white' }}>
+//       {isLoading ? (
+//         <ActivityIndicator size="large" color="#0000ff" />
+//       ) : (
+//         <>
+//           <FlatList
+//             data={products}
+//             renderItem={renderProductItem}
+//             keyExtractor={(item) => item.id.toString()}
+//             onEndReached={() => setShowSeeMoreButton(true)}
+//             onScroll={() => setShowSeeMoreButton(false)}
+//             contentContainerStyle={{ paddingBottom: 20 }}
+//           />
+//           {showSeeMoreButton && (
+//             <TouchableOpacity onPress={fetchProducts} style={{ alignSelf: 'center', marginVertical: 15 }}>
+//               <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#2E6BC6' }}>
+//                 See More
+//               </Text>
+//             </TouchableOpacity>
+//           )}
+//         </>
+//       )}
+//     </View>
+//   );
+// };
+
+// export default ProductList;
+
+
+
+import React, { useEffect, useState } from 'react' 
+import { ActivityIndicator, FlatList, Image, Text , TouchableOpacity, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import axios from 'axios'
+import EyeIcon from 'react-native-vector-icons/Ionicons'
+import { AirbnbRating } from 'react-native-ratings'
+
+
+const ProductList = ({route , navigation}) => {
+  const [productData,setProductData] = useState([])
+  const [currentPage, SetCurrentPage] = useState(1)
+  const [loading , setLoading] = useState(false)
+  const [hasMore , setHasMore] = useState(true)
+  // console.log(route.params)
+  const productId = route?.params?.productId
+  // console.log(productId)
+ 
+
+  async function ProductLists() {
+
+    if(!hasMore) return; 
+
+    setLoading(true)
+   try {
+    const accessTokens = await AsyncStorage.getItem('access_token')
+    // console.log(accessTokens)
+
+    const response = await axios.get(
+      `http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=${productId}&page=${currentPage}`
+
+    )
+    // console.log(response?.data.data)
+    setProductData((prevData) => [...prevData , ...response?.data?.data] )
+    setHasMore(response.data.data.length > 0)
+    SetCurrentPage(currentPage+1)
+    // console.log(productData.length)
+   } catch (error) {
+    console.log(error)
+
+   } finally {
+    setLoading(false)
+   }
   }
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const renderProductItem = ({ item }) => (
-    <TouchableOpacity
-      onPress={() => {
-        props.navigation.navigate('ProductDetails', { id: item.id });
-      }}
-      style={{
-        flexDirection: 'row',
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 12,
-        backgroundColor: 'white',
-        marginVertical: 10,
-        marginHorizontal: 16,
-        overflow: 'hidden',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-        elevation: 4,
-        padding: 10,
-      }}
-    > 
-    {/* <View></View> */}
-      <Image
-        style={{
-          height: 80,
-          width: 120,
-          // resizeMode: 'cover',
-          borderRadius: 8,
-          marginRight: 10,
-          alignItems: 'center',
-          borderWidth: 2
-        }}
-        source={{ uri: item.product_images }}
-      />
-      <View style={{ flex: 1 }}>
-        <Text style = {{fontFamily: 'Laila-Regular'}}>{item.producer}</Text>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 , color: 'blck'}}>
-          {item.name}
-        </Text>
-        {/* Uncomment if you want to show rating */}
-        {/* <StarRatingDisplay
-          style={{ marginVertical: 5 }}
-          starSize={20}
-          rating={item.rating}
-        /> */}
-
-
-<View>
-      <AirbnbRating
-        count={5}
-        defaultRating={rating}
-        onFinishRating={(rate) => setRating(rate)}
-        size={16}
+  const renderProductData = ( {item} ) => {
+    return (
+    // console.log(item)
+    <View style = {{ borderWidth: 0.75, margin: 10, borderRadius: 15 , flexDirection: "row" , overflow: 'hidden', alignItems: 'center'}}  >
+      <TouchableOpacity style= {{flexDirection: 'row'}} onPress = {() => navigation.navigate('ProductInfo' , { productId: item.id})}>
+     
+    <Image source = {{uri: item.product_images}} style = {{height: 100, width: 150 , marginTop: 20, marginLeft: 10, marginRight: 10}} resizeMode='contain'/>
+    {
+        // console.log(item)
+      } 
+        <View style = {{flexDirection: 'column' , paddingTop: 5}}>
+        <Text style = {{fontFamily: 'Laila-Regular'}}> { item.producer}</Text>
+        <Text style = {{fontFamily: 'Laila-SemiBold'}}> { item.name}</Text>
+        <View style = {{flexDirection: 'row'}}>
+          <EyeIcon name='eye' size={20} color='black' />
+        <Text> {item.view_count }</Text>
+        </View>
+        <View style = {{alignItems: 'flex-start'}}>
+        <AirbnbRating 
+        count = {5}
+        defaultRating={item.rating}
+        size={15}
         showRating={false}
-      />
-    </View>
-        
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-start',alignContent: 'center', alignItems : 'baseline' ,marginTop: 10 }}>
-        <Text style={{ color: '#2E6BC6', fontWeight: 'bold', fontSize: 18 }}>
-            {`₹${item.cost}`}
-          </Text>
-          <Text style={{ color: '#A4A4A4', textDecorationLine: 'line-through', fontSize: 16 , marginLeft: 10 }}>
-            {`₹${item.cost}`}
-          </Text>
-          
+        />
         </View>
 
-        <Text
-          style={{ marginTop: 5, fontSize: 14, color: '#555' }}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          {item.description}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
 
-  return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
-      ) : (
-        <>
-          <FlatList
-            data={products}
-            renderItem={renderProductItem}
-            keyExtractor={(item) => item.id.toString()}
-            onEndReached={() => setShowSeeMoreButton(true)}
-            onScroll={() => setShowSeeMoreButton(false)}
-            contentContainerStyle={{ paddingBottom: 20 }}
-          />
-          {showSeeMoreButton && (
-            <TouchableOpacity onPress={fetchProducts} style={{ alignSelf: 'center', marginVertical: 15 }}>
-              <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#2E6BC6' }}>
-                See More
-              </Text>
-            </TouchableOpacity>
-          )}
-        </>
-      )}
+        <View style = {{flexDirection: 'row' , alignContent: 'center'}}>
+        <Text style = {{color: 'blue', fontSize: 16}}> ₹{ item.cost}</Text> 
+        <Text style = {{textDecorationLine: 'line-through', fontSize: 14 , marginTop: 2, marginLeft: 5}}> ₹{ item.cost}</Text> 
+        </View>
+
+        <Text style = {{ width: 200, fontSize: 13 , marginBottom:15}}  numberOfLines={1} ellipsizeMode='tail'> { item.description}</Text>
+
+        </View>
+
+      </TouchableOpacity>
     </View>
-  );
-};
+    )
+  }
 
-export default ProductList;
+  useEffect(()=>{
+    ProductLists()
+
+  },[])
+  return (
+    <View style = {{flex:1 , backgroundColor: 'white'}}>
+    
+
+
+
+      <View>
+        <>
+      <FlatList 
+      data = {productData} 
+      renderItem = {renderProductData}
+      keyExtractor={(item) => item.id.toString() }
+      ListFooterComponent={
+        hasMore && (
+          <TouchableOpacity onPress={ProductLists} > 
+          {
+            loading ? <ActivityIndicator /> : <Text style = {{textAlign: 'center', fontSize: 16, color: 'blue' , fontFamily: 'Laila-SemiBold'}}> Show More</Text>
+          }
+            </TouchableOpacity>
+          
+        )
+      }
+      
+      
+      />
+      </>
+      <Text>HII</Text>
+      </View>
+
+
+
+    </View>
+  )
+}
+
+export default ProductList
+
+
 
 

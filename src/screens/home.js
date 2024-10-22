@@ -9,14 +9,17 @@ const images = [
   { id: 3, uri: require('/Users/neosoft1/Documents/NEOSTORE/neostore/src/images/chair1.png') }
 ];
 
-const HomeScreen = () => {
-  const navigation = useNavigation(); // Use useNavigation to get navigation instance
+const HomeScreen = (props) => {
+  // const navigation = useNavigation(); 
   const [productId, setProductId] = useState(null);
+  
 
   const handlePress = (id) => {
     setProductId(id);
-    // Navigate to the Products screen with the selected product ID
-    navigation.navigate('Products', { productId: id });
+    // console.log("id  " ,id)
+    // console.log("product id  ",productId)
+    
+    props.navigation.navigate('ProductList', { productId: id});
   };
 
   return (
@@ -57,9 +60,10 @@ const HomeScreen = () => {
 
       <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
         {[
-          { image: require('../images/sofa2.png'), label: 'SOFA', id: 1 },
-          { image: require('../images/table2.png'), label: 'TABLE', id: 2 },
-          { image: require('../images/chair2.png'), label: 'CHAIR', id: 3 },
+         
+          { image: require('../images/table2.png'), label: 'TABLE', id: 1 },
+          { image: require('../images/chair2.png'), label: 'CHAIR', id: 2 },
+          { image: require('../images/sofa2.png'), label: 'SOFA', id: 3 },
         ].map((item, index) => (
           <TouchableOpacity
             key={index}

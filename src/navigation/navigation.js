@@ -15,7 +15,8 @@ import HomeIcon from 'react-native-vector-icons/Entypo';
 import AccountIcon from 'react-native-vector-icons/Entypo';
 import SearchIcon from 'react-native-vector-icons/Entypo'; 
 import CartIcon from 'react-native-vector-icons/Entypo'; 
-import Products from '../screens/products';
+import ProductList from '../screens/products';
+import ProductInfo from '../screens/productInfo';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,7 +26,6 @@ function AccountStack() {
         <Stack.Navigator>
             <Stack.Screen name="Account" component={AccountScreenQ} options={{ headerShown: false }} />
             <Stack.Screen name="UpdateDetails" component={UpdateDetails} options={{ title: 'Update Details', headerTitleAlign: 'center' }} />
-
         </Stack.Navigator>
     );
 }
@@ -73,28 +73,28 @@ function TabNavigator() {
                 options={{
                     tabBarIcon: ({ color }) => <AccountIcon name='user' size={30} color={color} />,
                     tabBarLabel: 'Account',
-                    headerShown:false 
+                    headerShown: false 
                 }}
-            />
-             <Tab.Screen
-                name='Products'
-                component={Products}
-                options={{ tabBarButton: () => null , headerShown: false}} // Hide the tab button if not needed
             />
         </Tab.Navigator>
     );
 }
 
 const AllScreens = () => {
-    const { isLoggedIn } = useContext(AuthContext); // Access the login state
+    const { isLoggedIn } = useContext(AuthContext);
 
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {isLoggedIn ? (
-                    <Stack.Screen name='Main' component={TabNavigator} /> // Show main app stack if logged in
+                    <>
+                        <Stack.Screen name='Home' component={HomeScreen} />
+                        <Stack.Screen name='ProductList' component={ProductList} />
+                        <Stack.Screen name= 'ProductInfo' component={ProductInfo} />
+                        <Stack.Screen name='Main' component={TabNavigator} />
+                    </>
                 ) : (
-                    <Stack.Screen name='Auth' component={AuthStack} /> // Show authentication stack otherwise
+                    <Stack.Screen name='Auth' component={AuthStack} />
                 )}
             </Stack.Navigator>
         </NavigationContainer>
