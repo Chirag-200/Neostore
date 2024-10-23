@@ -1,4 +1,4 @@
-import { Text, TextInput, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import React, { useState } from 'react';
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
@@ -12,6 +12,7 @@ const images = [
 const HomeScreen = (props) => {
   // const navigation = useNavigation(); 
   const [productId, setProductId] = useState(null);
+  const {height,width} = Dimensions.get('window')
   
 
   const handlePress = (id) => {
@@ -58,7 +59,7 @@ const HomeScreen = (props) => {
 
       <Text style={{ fontSize: 21, color: 'black' }}> Categories </Text>
 
-      <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+      {/* <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
         {[
          
           { image: require('../images/table2.png'), label: 'TABLE', id: 1 },
@@ -84,7 +85,54 @@ const HomeScreen = (props) => {
             </View>
           </TouchableOpacity>
         ))}
-      </View>
+        </View> */}
+
+        {/* <TouchableOpacity >
+        <View style = {{height: 400, width: 400 , flexDirection: 'row' , flexWrap: 'wrap' , }}> 
+        <View >
+          <Image source = {require('../images/table2.png')} style = {{height: height*0.11 , width: width*0.41 ,marginLeft: width*0.06 , marginTop: height* 0.05 , borderRadius: 20 , shadowOffset: {height:2,width:0} , shadowOpacity: 0.3 , shadowRadius: 4, elevation: 5 , shadowColor: 'black'}} />
+          <Text style = {{marginLeft: width*0.2}}> TABLES </Text>
+
+
+          </View>
+          <View>
+          <Image source = {require('../images/chair2.png')} style = {{height: height*0.11 , width: width*0.41 ,marginLeft: width*0.06, marginTop: height* 0.05, borderRadius: 20}}/>
+          <Text style = {{marginLeft: width*0.2}}> CHAIRS </Text>
+          </View>
+          <View>
+          <Image source = {require('../images/sofa2.png')}  style = {{height: height*0.11 , width: width*0.41 , marginLeft: width*0.06, marginTop: height* 0.05, borderRadius: 20}} />
+          <Text style = {{marginLeft: width*0.2}}> SOFA </Text>
+          </View>
+        </View>
+        </TouchableOpacity> */}
+        <View style = {{flexDirection: 'row', flexWrap: 'wrap'}}>
+        {
+          [
+            { image: require('../images/table2.png'), label: 'TABLE', id: 1 },
+          { image: require('../images/chair2.png'), label: 'CHAIR', id: 2 },
+          { image: require('../images/sofa2.png'), label: 'SOFA', id: 3 },
+          ].map( (item,index) => (
+            <TouchableOpacity 
+            key = {index}
+            onPress={()=>handlePress(item.id)}
+            
+            
+            
+            
+            >
+              <View style = {{flexDirection: 'row' , overflow: 'hidden'}}>
+              <Image source = {item.image} style = {{height: height*0.11 , width: width*0.41 , marginLeft: width*0.06 , marginTop: height*0.05 , borderRadius: 20}}/>
+              
+              
+              </View>
+              <Text style = {{marginLeft: width*0.2, color: 'black' , fontFamily: 'Laila-Regular'}}>{item.label}</Text>
+
+            </TouchableOpacity>
+          )
+        )
+        }
+        </View>
+      
     </ScrollView>
   );
 };

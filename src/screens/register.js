@@ -66,7 +66,7 @@ const RegisterScreen = () => {
     formData.append('password', password)
     formData.append('confirm_password', confirmPassword)
     formData.append('gender', selectedGender)
-    formData.append('phone_no', phoneNumber)
+    formData.append('phone_no', Number(phoneNumber))
     console.log(formData)
 
 
@@ -107,11 +107,13 @@ const RegisterScreen = () => {
 
 
 
-  const validateFirstName = () => {
+  const validateFirstName = () => { 
+    setFirstNameError(firstName === "" ? "Please Enter Name ": "")
     setFirstNameError(firstName.trim().length < 4 ? 'Required: min 4 chars' : '');
   };
 
   const validateLastName = () => {
+    setLastNameError(lastName === "" ? "Please Enter last Name" : "")
     setLastNameError(lastName.trim().length < 4 ? 'Required: min 4 chars' : '');
   };
 
@@ -121,19 +123,23 @@ const RegisterScreen = () => {
   };
 
   const emailValidation = () => {
+    setEmailError(lastName === "" ? "Please Enter Email" : "")
     setEmailError(!validateEmail(email) ? 'Please enter a valid email' : '');
   };
 
   const validatePassword = (password) => {
+
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
     return regex.test(password);
   };
 
-  const passwordValidation = (password) => {
+  const passwordValidation = () => {
+    setPasswordError(password === "" ? "Please Enter password" : "")
     setPasswordError(!validatePassword(password) ? 'Password must be at least 8 characters, include an uppercase letter, a lowercase letter, a number, and a special character.' : '');
   };
 
-  const confirmPasswordValidation = (confirmPassword) => {
+  const confirmPasswordValidation = () => {
+    setConfirmPasswordError(confirmPassword === "" ? "Please Enter Confirm Password" : "")
     setConfirmPasswordError(confirmPassword !== password ? 'Passwords do not match' : '');
   };
 
@@ -159,20 +165,49 @@ const RegisterScreen = () => {
   const toggleConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword)
   }
-
   const validateField = () => {
-    if (firstNameError === '' && lastNameError === '' && emailError === '' && passwordError === '' && confirmPasswordError === '' && phoneNumberError === '') {
-      {
-        // console.log("value of ------>>>",formData)
-      }
-      sendUserData()
-      Alert.alert('Registered Successfully')
-    } else {
-      Alert.alert('Enter corect details')
+    validateFirstName();
+    validateLastName();
+    emailValidation();
+    passwordValidation();
+    confirmPasswordValidation();
+    phoneValidation();
+  
+
+    if (!firstName && !lastName && !email && !password && !confirmPassword && !phoneNumber) {
+      Alert.alert("Please Enter All the Details");
+      return;
     }
-  }
+  
+
+    if (firstNameError || lastNameError || emailError || passwordError || confirmPasswordError || phoneNumberError) {
+      Alert.alert('Enter correct details');
+      return;
+    }
+  
+
+    if (!selectedGender) {
+      Alert.alert('Please select your gender');
+      return;
+    }
+  
+    if (!terms) {
+      Alert.alert('Please agree to the Terms & Conditions');
+      return;
+    }
+  
+    // If all validations pass, send user data
+    sendUserData();
+    Alert.alert( 'Thank You ', 'Registered Successfully'   , [
+      {
+        text: 'OK' , onPress: ()=>{ navigation.navigate('Login')}
+      }
+    ]);
+    // navigation.navigate('Login')
+  };
+  
   // const phoneValidation =(phoneNumber) =>{
-  //   console.log( phoneNumber.data)
+  //   console.log( phoneNumber.data
   //   if (phoneNumber.length == 10) {
   //     setphoneNumberError('')
 
@@ -192,7 +227,7 @@ const RegisterScreen = () => {
       </View> */}
       <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 20 }}>
         <Text style={{ fontSize: 25, color: 'black', fontFamily: 'Laila-Bold' }}>NEO</Text>
-        <Text style={{ fontSize: 25, color: 'black', fontFamily: 'Laila-Bold' }}>STORE</Text>
+        <Text style={{ fontSize: 25, color: 'blue', fontFamily: 'Laila-Bold' }}> STORE</Text>
       </View>
 
 
@@ -264,7 +299,7 @@ const RegisterScreen = () => {
         outlineStyle={{ borderRadius: 10 }}
       />
 
-      {passwordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{passwordError}</Text>}
+      {passwordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{passwordError}</Text> }
 
 
       <TextInput
@@ -283,7 +318,7 @@ const RegisterScreen = () => {
         outlineStyle={{ borderRadius: 10 }}
       />
 
-      {confirmPasswordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{confirmPasswordError}</Text>}
+      {confirmPasswordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{confirmPasswordError}</Text> }
 
 
 
@@ -292,6 +327,7 @@ const RegisterScreen = () => {
         label='Phone Number'
         mode='outlined'
         activeOutlineColor='blue'
+        maxLength={10}
         left={<TextInput.Icon color='#2E64FE' icon='cellphone' size={30} />}
         keyboardType='number-pad'
         style={{ marginBottom: 15, backgroundColor: "white" }}
@@ -344,7 +380,7 @@ const RegisterScreen = () => {
 
       <Pressable style={{ alignItems: 'center', marginBottom: 20, padding: 2, borderRadius: 50, backgroundColor: '#0030FF' }} onPress={validateField}>
 
-        <Text style={{ fontSize: 20, color: 'white' }}>Register</Text>
+        <Text style={{ fontSize: 20, color: 'white' , padding: 10}}>Register</Text>
 
 
       </Pressable>

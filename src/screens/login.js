@@ -7,13 +7,14 @@ import { AuthContext } from '../AuthContext';
 
 const LoginScreen = ({ navigation }) => {
     const { login } = useContext(AuthContext); 
+    const [showPassword, setShowPassword] = useState(false); // State for password visibility
+
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]*$/;
 
-    // Initial state with default values for email and password
     const initialState = {
-        email: 'mytest@gmail.com', // Initial email value
-        password: '#Email@1234', // Initial password value
+        email: 'mytest@gmail.com',
+        password: '#Email@1234',
         emailError: '',
         passwordError: ''
     };
@@ -40,6 +41,10 @@ const LoginScreen = ({ navigation }) => {
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword); // Toggle password visibility
+    };
+
     const loginUser = async () => {
         const formDataToSend = new FormData();
         formDataToSend.append('email', formData.email);
@@ -53,21 +58,14 @@ const LoginScreen = ({ navigation }) => {
             );
 
             if (response.status === 200) {
-                
                 Alert.alert('Login Successful');
                 login(); 
-             
-
                 navigation.navigate('Main'); 
-                // console.log(response.data.data.acc)
                 const accessToken = response?.data?.data?.access_token;
-                // console.log(accessToken)
-             AsyncStorage.setItem('access_token', accessToken);
-                // console.log(typeof accessToken)
+                AsyncStorage.setItem('access_token', accessToken);
             }
-            
         } catch (error) {
-            const message = error.response || 'Login Failed. Please try again later.';
+            const message = error.response?.data?.message || 'Login Failed. Please try again later.';
             Alert.alert('Error', message);
         }
     };
@@ -104,7 +102,7 @@ const LoginScreen = ({ navigation }) => {
                     activeOutlineColor='blue'
                     left={<TextInput.Icon color='#0030FF' icon='email' size={30} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
-                    value={formData.email} // Bind value here
+                    value={formData.email}
                     onChangeText={(text) => setFormData(prev => ({ ...prev, email: text }))}
                     onBlur={validateEmail}
                 />
@@ -115,10 +113,10 @@ const LoginScreen = ({ navigation }) => {
                     mode='outlined'
                     activeOutlineColor='blue'
                     left={<TextInput.Icon color='#0030FF' icon='account-lock-outline' size={30} />}
-                    right={<TextInput.Icon color='blue' icon='eye-off' size={30} />}
+                    right={<TextInput.Icon color='blue' icon={showPassword ? 'eye' : 'eye-off'} size={30} onPress={togglePasswordVisibility} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
-                    secureTextEntry
-                    value={formData.password} // Bind value here
+                    secureTextEntry={!showPassword} // Toggle secureTextEntry based on state
+                    value={formData.password} 
                     onChangeText={(text) => setFormData(prev => ({ ...prev, password: text }))}
                     onBlur={validatePassword}
                 />
@@ -127,7 +125,7 @@ const LoginScreen = ({ navigation }) => {
 
             <View style={{ marginLeft: 20, marginRight: 20 }}>
                 <TouchableOpacity onPress={handleSubmit} style={{ padding: 10, backgroundColor: '#0030FF', borderRadius: 50 }}>
-                    <Text style={{ fontSize: 20, color: 'white', textAlign:'center' }}>Sign In</Text>
+                    <Text style={{ fontSize: 20, color: 'white', textAlign: 'center' }}>Sign In</Text>
                 </TouchableOpacity>
             </View>
 
