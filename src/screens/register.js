@@ -93,8 +93,38 @@ const RegisterScreen = () => {
     //   let abcd = result.data.data.access_token
     //   console.log("the result === ", abcd)
       } 
+    // catch (error) {
+    //   console.log("error",error?.response?.data?.user_msg)
+
+    //   Alert.alert( error?.response?.data?.user_msg   , [
+    //     {
+    //       text: 'OK' , onPress: ()=>{ resetForm()}
+    //     }
+    //   ]); 
+    // }
     catch (error) {
-      console.log("error",error)
+      const errorMsg = error?.response?.data?.user_msg;
+    
+
+      if (Array.isArray(errorMsg)) {
+        console.log(">>>>", typeof errorMsg)
+        Alert.alert("Error", errorMsg.join(', '), [
+          { text: 'OK', onPress: () => resetForm() }
+        ]);
+      } else if (typeof errorMsg === 'object') {
+        console.log(">>>>111", typeof errorMsg)
+
+        Alert.alert("Error", JSON.stringify(errorMsg), [
+          { text: 'OK', onPress: () => resetForm() }
+        ]);
+      } else {
+
+        console.log(">>>>222", typeof errorMsg)
+
+        Alert.alert("Error", errorMsg || "An unknown error occurred.", [
+          { text: 'OK', onPress: () => resetForm() }
+        ]);
+      }
     }
   
   
@@ -196,13 +226,17 @@ const RegisterScreen = () => {
       return;
     }
   
-    // If all validations pass, send user data
+
+    
     sendUserData();
     Alert.alert( 'Thank You ', 'Registered Successfully'   , [
       {
         text: 'OK' , onPress: ()=>{ navigation.navigate('Login')}
       }
-    ]);
+    
+    ]); 
+  
+    
     // navigation.navigate('Login')
   };
   
@@ -216,6 +250,13 @@ const RegisterScreen = () => {
   //   }
   // }
 
+
+    const resetForm = () => {
+      
+        console.log('RESET')
+        setEmail('')
+      
+    }
 
 
 
@@ -244,6 +285,7 @@ const RegisterScreen = () => {
           style={{ marginBottom: 15, backgroundColor: 'white' }}
           onChangeText={setFirstName}
           outlineStyle={{ borderRadius: 10 }}
+          value={firstName}
 
         />
       </View>
@@ -260,6 +302,7 @@ const RegisterScreen = () => {
         style={{ marginBottom: 15, backgroundColor: 'white' }}
         onChangeText={setLastName}
         outlineStyle={{ borderRadius: 10 }}
+        value={lastName}
       />
 
       {lastNameError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{lastNameError}</Text>}
@@ -277,6 +320,7 @@ const RegisterScreen = () => {
           // emailValidation();
         }}
         outlineStyle={{ borderRadius: 10 }}
+        value={email}
       />
 
       {emailError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{emailError}</Text>}
@@ -297,6 +341,7 @@ const RegisterScreen = () => {
           passwordValidation(text);
         }}
         outlineStyle={{ borderRadius: 10 }}
+        value={password}
       />
 
       {passwordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{passwordError}</Text> }
@@ -316,6 +361,7 @@ const RegisterScreen = () => {
           confirmPasswordValidation(text);
         }}
         outlineStyle={{ borderRadius: 10 }}
+        value={confirmPassword}
       />
 
       {confirmPasswordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{confirmPasswordError}</Text> }
@@ -333,6 +379,7 @@ const RegisterScreen = () => {
         style={{ marginBottom: 15, backgroundColor: "white" }}
         onChangeText={(text) => setPhoneNumber(text)}
         outlineStyle={{ borderRadius: 10 }}
+        value={phoneNumber}
       />
       {
         phoneNumberError ? <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}> {phoneNumberError} </Text> : null

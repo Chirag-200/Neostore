@@ -63,6 +63,7 @@ const LoginScreen = ({ navigation }) => {
                 navigation.navigate('Main'); 
                 const accessToken = response?.data?.data?.access_token;
                 AsyncStorage.setItem('access_token', accessToken);
+                console.log("loginnnnn:",accessToken)
             }
         } catch (error) {
             const message = error.response?.data?.message || 'Login Failed. Please try again later.';
@@ -81,6 +82,8 @@ const LoginScreen = ({ navigation }) => {
 
         await loginUser();
     };
+
+    
 
     return (
         <ScrollView style={{ backgroundColor: 'white' }}>
