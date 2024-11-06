@@ -3,20 +3,26 @@ import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AuthContext } from '../AuthContext'; // Import AuthContext
+import { AuthContext } from '../AuthContext';
 import AccountScreenQ from '../screens/account';
 import UpdateDetails from '../screens/updateDetails';
 import HomeScreen from '../screens/home';
-import SearchScreen from '../screens/search'; 
-import CartScreen from '../screens/cart'; 
+import SearchScreen from '../screens/search';
+import CartScreen from '../screens/cart';
 import LoginScreen from '../screens/login';
 import RegisterScreen from '../screens/register';
 import HomeIcon from 'react-native-vector-icons/Entypo';
 import AccountIcon from 'react-native-vector-icons/Entypo';
-import SearchIcon from 'react-native-vector-icons/Entypo'; 
-import CartIcon from 'react-native-vector-icons/Entypo'; 
+import SearchIcon from 'react-native-vector-icons/Entypo';
+import CartIcon from 'react-native-vector-icons/Entypo';
 import ProductList from '../screens/products';
 import ProductInfo from '../screens/productInfo';
+import Addresss from '../screens/address';
+import { Image, Text, TouchableOpacity } from 'react-native';
+import AddAdress from '../screens/AddAdress';
+import { useNavigation } from '@react-navigation/native';
+
+// import Address from '../Address';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,32 +45,50 @@ function AuthStack() {
     );
 }
 
+ function HomeComponent () {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
+            <Stack.Screen name='ProductList' component={ProductList} options={{headerShown: false}}/>
+          <Stack.Screen name='ProductInfo' component={ProductInfo} options={{headerShown: false}} />
+         
+        </Stack.Navigator>
+    )
+ }
+
+
+ function CartComponent () {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name='CartTab' component={CartScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Address" component={Addresss} options={{ headerTitleAlign:'center', headerStyle:{backgroundColor:'rgb(0,122,255)'} , headerTintColor:'black', headerTransparent:'true' , headerRight: ( () => <Add />)}} />
+
+        <Stack.Screen name= "AddAdress" component={AddAdress} options={{title:'Add New Address' , headerTitleAlign:'center' , headerStyle:{backgroundColor:'rgb(0,122,255)'} , headerTintColor:'black', headerTransparent:'true'}}/>
+        </Stack.Navigator>
+    )
+ }
 function TabNavigator() {
     return (
         <Tab.Navigator>
             <Tab.Screen
                 name='HomeTab'
-                component={HomeScreen}
+                component={HomeComponent}
                 options={{
                     tabBarIcon: ({ color }) => <HomeIcon name='home' size={30} color={color} />,
                     tabBarLabel: 'Home',
                     headerShown: false
                 }}
             />
-            <Tab.Screen
-                name='SearchTab'
-                component={SearchScreen} 
-                options={{
-                    tabBarIcon: ({ color }) => <SearchIcon name='magnifying-glass' size={30} color={color} />,
-                    tabBarLabel: 'Search',
-                }}
-            />
+           
             <Tab.Screen
                 name='CartTab'
-                component={CartScreen} 
+                component={CartComponent}
                 options={{
                     tabBarIcon: ({ color }) => <CartIcon name='shopping-cart' size={30} color={color} />,
                     tabBarLabel: 'Cart',
+                    headerShown: false,
+                    tabBarBadge: 1 ,
+                    tabBarBadgeStyle: {}
                 }}
             />
             <Tab.Screen
@@ -73,7 +97,6 @@ function TabNavigator() {
                 options={{
                     tabBarIcon: ({ color }) => <AccountIcon name='user' size={30} color={color} />,
                     tabBarLabel: 'Account',
-                    headerShown: false 
                 }}
             />
         </Tab.Navigator>
@@ -88,10 +111,9 @@ const AllScreens = () => {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {isLoggedIn ? (
                     <>
-                        <Stack.Screen name='Home' component={HomeScreen} />
-                        <Stack.Screen name='ProductList' component={ProductList} />
-                        <Stack.Screen name= 'ProductInfo' component={ProductInfo} />
+
                         <Stack.Screen name='Main' component={TabNavigator} />
+                      
                     </>
                 ) : (
                     <Stack.Screen name='Auth' component={AuthStack} />
@@ -99,6 +121,16 @@ const AllScreens = () => {
             </Stack.Navigator>
         </NavigationContainer>
     );
+}
+
+
+const Add= () => {
+    const navigation = useNavigation()
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate('AddAdress')}>
+            <Image source={require('../images/add.png')} style={{ height: 25, width: 25 }} />
+            </TouchableOpacity>
+    )
 }
 
 export default AllScreens;
