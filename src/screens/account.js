@@ -7,6 +7,8 @@ const AccountScreenQ = ({ navigation }) => {
         console.log(`${option} pressed`);
     };
 
+   
+
     return (
         <View >
             <Text style={styles.title}>Profile</Text>
@@ -37,6 +39,12 @@ const AccountScreenQ = ({ navigation }) => {
                 >
                     <Icon name="lock-outline" size={24} color="blue" />
                     <Text style={styles.cell}>Change Password</Text>
+                    <Text style={styles.arrow}>{' >'}</Text>
+                </TouchableOpacity>
+                <View style={styles.separator} />
+                <TouchableOpacity  style={styles.row} onPress={() => navigation.navigate("OrderList")} >
+                <Icon name="shopping-bag" size={24} color="blue" />
+                    <Text style={styles.cell}>Order List</Text>
                     <Text style={styles.arrow}>{' >'}</Text>
                 </TouchableOpacity>
             </View>

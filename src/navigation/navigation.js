@@ -21,6 +21,9 @@ import Addresss from '../screens/address';
 import { Image, Text, TouchableOpacity } from 'react-native';
 import AddAdress from '../screens/AddAdress';
 import { useNavigation } from '@react-navigation/native';
+import CheckOut from '../screens/checkout';
+import OrderList from '../screens/orderList';
+import OrderDetails from '../screens/orderDetails';
 
 // import Address from '../Address';
 
@@ -32,6 +35,8 @@ function AccountStack() {
         <Stack.Navigator>
             <Stack.Screen name="Account" component={AccountScreenQ} options={{ headerShown: false }} />
             <Stack.Screen name="UpdateDetails" component={UpdateDetails} options={{ title: 'Update Details', headerTitleAlign: 'center' }} />
+            <Stack.Screen name="OrderList" component={OrderList} options={{ title: 'Order Details', headerTitleAlign: 'center' }} />
+            <Stack.Screen name="OrderDetails" component={OrderDetails} options={{ title: 'Order Details', headerTitleAlign: 'center' }} />
         </Stack.Navigator>
     );
 }
@@ -61,12 +66,15 @@ function AuthStack() {
     return (
         <Stack.Navigator>
             <Stack.Screen name='CartTab' component={CartScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="Address" component={Addresss} options={{ headerTitleAlign:'center', headerStyle:{backgroundColor:'rgb(0,122,255)'} , headerTintColor:'black', headerTransparent:'true' , headerRight: ( () => <Add />)}} />
+        <Stack.Screen name="Address" component={Addresss} options={{ headerTitleAlign:'center', headerStyle:{backgroundColor:'white'} , headerTintColor:'black', headerTransparent:'true' , headerRight: ( () => <Add />)}} />
 
-        <Stack.Screen name= "AddAdress" component={AddAdress} options={{title:'Add New Address' , headerTitleAlign:'center' , headerStyle:{backgroundColor:'rgb(0,122,255)'} , headerTintColor:'black', headerTransparent:'true'}}/>
-        </Stack.Navigator>
+        <Stack.Screen name= "AddAdress" component={AddAdress} options={{title:'Add New Address' , headerTitleAlign:'center' , headerStyle:{backgroundColor:'white'} , headerTintColor:'black', headerTransparent:'true'}}/>
+        <Stack.Screen name="CheckOut" component={CheckOut} options={{headerTitleAlign:'center'}}/>
+        </Stack.Navigator> 
     )
  }
+
+
 function TabNavigator() {
     return (
         <Tab.Navigator>
@@ -97,6 +105,7 @@ function TabNavigator() {
                 options={{
                     tabBarIcon: ({ color }) => <AccountIcon name='user' size={30} color={color} />,
                     tabBarLabel: 'Account',
+                    headerShown: false
                 }}
             />
         </Tab.Navigator>

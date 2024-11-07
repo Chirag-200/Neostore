@@ -16,7 +16,7 @@ const CartScreen = (props) => {
  
     useEffect(() => {
         ListCartItems();
-    }, []);
+    },[]);
 
     // const handleQuantityChange = async (productId, quantityChange) => {
     //     console.log("Current cart items:", cartItems); // Log current cart items
@@ -149,11 +149,11 @@ const CartScreen = (props) => {
             });
             setCart(response.data.data);
             
-            console.log("try   ",response.data.total)
-            console.log("cart",cart)
+            // console.log("try   ",response.data.total)
+            // console.log("cart",cart)
             setTotal(response.data.total)
         } catch (error) {
-            console.error('Error fetching data:', error);
+            // console.error('Error fetching data:', error);
         }
     };
 

@@ -86,7 +86,7 @@ const AddAddress = (props) => {
         <View style={styles.container}>
 
 
-            <Text style={{ fontSize: 16, fontFamily: 'Laila-Medium', color: 'black', textAlign: 'center', marginBottom: 10 }}>SHIPPING ADDRESS</Text>
+            <Text style={{ fontSize: 16, fontFamily: 'Laila-Medium', color: 'black', textAlign: 'center', marginBottom: 10, backgroundColor:'lightgray', borderRadius:10 }}> ADD SHIPPING ADDRESS</Text>
 
 
 
@@ -160,6 +160,7 @@ const AddAddress = (props) => {
 const styles = StyleSheet.create({
     container: {
         padding: 10,
+        backgroundColor:'white'
     },
     input: {
         borderWidth: 1,

@@ -9,14 +9,15 @@ import { launchImageLibrary } from 'react-native-image-picker';
 const UpdateDetails = () => {
     const [userData, setUserData] = useState({
         firstName: '',
+        lastName: '',
         email: '',
         phoneNumber: '',
-        birthDate: 'DD/MM/YYYY',
-        profilePic: ''
+        birthDate: '07/10/2020',
+        profilePic: null,
     });
+    const [imageUri, setImageUri] = useState(null); // This is to store the image URI
     const [showPicker, setShowPicker] = useState(false);
     const [date, setDate] = useState(new Date());
-    const [imageUri, setImageUri] = useState(null);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -35,16 +36,17 @@ const UpdateDetails = () => {
                 headers: {
                     'access_token': token,
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
                 },
             });
 
+            const { first_name, last_name, email, phone_no, birthDate, profilePic } = response.data.data.user_data;
             setUserData({
-                firstName: response.data.data.user_data.first_name || '',
-                email: response.data.data.user_data.email || '',
-                phoneNumber: response.data.data.user_data.phone_no || '',
-                birthDate: response.data.data.user_data.birthDate || 'DD/MM/YYYY',
-                profilePic: response.data.data.user_data.profilePic || ''
+                firstName: first_name || '',
+                lastName: last_name || '',
+                email: email || '',
+                phoneNumber: phone_no || '',
+                birthDate: birthDate || '07/10/2020',
+                profilePic: profilePic || null,
             });
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -60,9 +62,7 @@ const UpdateDetails = () => {
         setUserData((prevState) => ({ ...prevState, birthDate: formattedDate }));
     };
 
-    const showDatePicker = () => {
-        setShowPicker(true);
-    };
+    const showDatePicker = () => setShowPicker(true);
 
     const handleImagePick = () => {
         launchImageLibrary({ mediaType: 'photo', includeBase64: true }, (response) => {
@@ -72,16 +72,31 @@ const UpdateDetails = () => {
                 console.error('ImagePicker Error: ', response.error);
             } else if (response.assets) {
                 const base64Image = response.assets[0].base64;
-                setImageUri(`data:${response.assets[0].type};base64,${base64Image}`);
+                setImageUri(`data:${response.assets[0].type};base64,${base64Image}`); // Set image URI with base64 string
                 setUserData((prevState) => ({ ...prevState, profilePic: base64Image }));
             }
         });
     };
 
     const handleSubmit = async () => {
-        if (!userData.firstName || !userData.email || !userData.phoneNumber) {
+        const { firstName, lastName, email, phoneNumber, birthDate, profilePic } = userData;
+        if (!firstName || !lastName || !email || !phoneNumber) {
             Alert.alert('Error', 'Please fill in all fields.');
             return;
+        }
+
+        const formData = new FormData();
+        formData.append('first_name', firstName);
+        formData.append('last_name', lastName);
+        formData.append('email', email);
+        formData.append('dob', birthDate);
+        formData.append('phone_no', phoneNumber);
+        if (profilePic) {
+            formData.append('profile_pic', {
+                uri: `data:image/jpeg;base64,${profilePic}`,
+                type: 'image/jpeg',
+                name: 'profile.jpg',
+            });
         }
 
         setLoading(true);
@@ -92,11 +107,9 @@ const UpdateDetails = () => {
                 return;
             }
 
-            const response = await axios.post('http://staging.php-dev.in:8844/trainingapp/api/users/update', userData, {
+            const response = await axios.post('http://staging.php-dev.in:8844/trainingapp/api/users/update', formData, {
                 headers: {
-                    'access_token': token,
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
                 },
             });
 
@@ -123,6 +136,13 @@ const UpdateDetails = () => {
                 style={styles.input}
             />
             <TextInput
+                label='Last Name'
+                mode='outlined'
+                value={userData.lastName}
+                onChangeText={(text) => setUserData((prevState) => ({ ...prevState, lastName: text }))}
+                style={styles.input}
+            />
+            <TextInput
                 label='Email'
                 mode='outlined'
                 value={userData.email}
@@ -141,29 +161,19 @@ const UpdateDetails = () => {
                 mode='outlined'
                 value={userData.birthDate}
                 editable={false}
-                onFocus={showDatePicker}
+                onTouchEnd={showDatePicker}
                 style={styles.input}
             />
             <TouchableOpacity onPress={handleImagePick} style={styles.button}>
-                <Text style={styles.buttonText}>
-                    Pick Profile Picture
-                </Text>
+                <Text style={styles.buttonText}>Pick Profile Picture</Text>
             </TouchableOpacity>
 
             {imageUri && (
-                <Image
-                    source={{ uri: imageUri }}
-                    style={styles.profileImage}
-                />
+                <Image source={{ uri: imageUri }} style={styles.profileImage} />
             )}
 
             {showPicker && (
-                <DateTimePicker
-                    value={date}
-                    mode="date"
-                    display="calendar"
-                    onChange={handleDateChange}
-                />
+                <DateTimePicker value={date} mode="date" display="calendar" onChange={handleDateChange} />
             )}
 
             <TouchableOpacity onPress={handleSubmit} style={styles.submitButton} disabled={loading}>
