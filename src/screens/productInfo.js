@@ -4,8 +4,8 @@ import { AirbnbRating } from 'react-native-ratings';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import EyeIcon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../redux/reducer';
+
+
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,7 +14,7 @@ const ProductInfo = (props) => {
     const [productInfo, setProductInfo] = useState({});
     const { height, width } = Dimensions.get('screen');
     const [count, setCount] = useState(0);
-    const dispatch = useDispatch();
+
 
     async function fetchProductInfo() {
         try {
@@ -56,7 +56,7 @@ const ProductInfo = (props) => {
                 return;
             }
         
-            dispatch(addToCart({ product: productInfo, quantity: count }));
+            // dispatch(addToCart({ product: productInfo, quantity: count }));
         
             const data = new FormData();
             data.append('product_id', productInfo.id);
@@ -135,7 +135,7 @@ const ProductInfo = (props) => {
                         <Text style={{ color: 'green' }}> 0% OFF</Text>
                         <Text style={{ textDecorationLine: 'line-through', fontSize: 13 }}> ₹{productInfo.cost}</Text>
                     </View>
-                    <Text style={{ fontFamily: 'Laila-Regular' }}>{productInfo.description}</Text>
+                    <Text style={{ fontFamily: 'Laila-Regular' }}>{productInfo?.description}</Text>
 
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text style={{ fontFamily: 'Laila-Bold', fontSize: 20, color: 'black' }}>Quantity</Text>

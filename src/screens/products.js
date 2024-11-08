@@ -881,7 +881,7 @@ const ProductList = ({route , navigation}) => {
       
       />
       </>
-      <Text>HII</Text>
+
       </View>
 
 

@@ -1,11 +1,51 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const AccountScreenQ = ({ navigation }) => {
     const handlePress = (option) => {
         console.log(`${option} pressed`);
     };
+
+
+
+
+    const handleLogout = async () => {
+        // Show confirmation alert
+        Alert.alert(
+            'Are You Sure?',
+            'You want to logout.',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'OK',
+                    onPress: async () => {
+                        try {
+                            // Clear the access token from AsyncStorage
+                            await AsyncStorage.removeItem('access_token');
+                            // Optionally clear any other user data stored in AsyncStorage
+                            // await AsyncStorage.removeItem('user_data');
+                            
+                            // Navigate the user to the login screen (assuming you're using react-navigation)
+                            navigation.replace('LoginScreen'); // 'Login' should be your login screen name in the navigation stack
+
+                            // Optionally, you can show a confirmation message or perform any additional actions here
+                            console.log('User has been logged out');
+                        } catch (error) {
+                            console.error('Error during logout', error);
+                            Alert.alert('Error', 'Something went wrong while logging out.');
+                        }
+                    },
+                },
+            ],
+            { cancelable: false }
+        );
+    };
+   
 
     return (
         <View >
@@ -37,6 +77,28 @@ const AccountScreenQ = ({ navigation }) => {
                 >
                     <Icon name="lock-outline" size={24} color="blue" />
                     <Text style={styles.cell}>Change Password</Text>
+                    <Text style={styles.arrow}>{' >'}</Text>
+                </TouchableOpacity>
+                <View style={styles.separator} />
+                <TouchableOpacity  style={styles.row} onPress={() => navigation.navigate("OrderList")} >
+                <Icon name="shopping-bag" size={24} color="blue" />
+                    <Text style={styles.cell}>Order List</Text>
+                    <Text style={styles.arrow}>{' >'}</Text>
+                </TouchableOpacity>
+
+                <View style={styles.separator} />
+
+                <TouchableOpacity 
+                    style={styles.row} 
+                    onPress={() => {
+                        handleLogout()
+
+                    }}
+                    activeOpacity={0.99}
+                    accessibilityLabel="Update Details"
+                >
+                    <Icon name="logout" size={24} color="blue" />
+                    <Text style={styles.cell}>Update Details</Text>
                     <Text style={styles.arrow}>{' >'}</Text>
                 </TouchableOpacity>
             </View>

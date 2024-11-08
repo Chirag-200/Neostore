@@ -17,6 +17,16 @@ import SearchIcon from 'react-native-vector-icons/Entypo';
 import CartIcon from 'react-native-vector-icons/Entypo';
 import ProductList from '../screens/products';
 import ProductInfo from '../screens/productInfo';
+import Addresss from '../screens/address';
+import { Image, Text, TouchableOpacity } from 'react-native';
+import AddAdress from '../screens/AddAdress';
+import { useNavigation } from '@react-navigation/native';
+import CheckOut from '../screens/checkout';
+import OrderList from '../screens/orderList';
+import OrderDetails from '../screens/orderDetails';
+import ChangePassword from '../screens/changepass';
+
+// import Address from '../Address';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,6 +36,9 @@ function AccountStack() {
         <Stack.Navigator>
             <Stack.Screen name="Account" component={AccountScreenQ} options={{ headerShown: false }} />
             <Stack.Screen name="UpdateDetails" component={UpdateDetails} options={{ title: 'Update Details', headerTitleAlign: 'center' }} />
+            <Stack.Screen name="OrderList" component={OrderList} options={{ title: 'Order Details', headerTitleAlign: 'center' }} />
+            <Stack.Screen name="OrderDetails" component={OrderDetails} options={{ title: 'Order Details', headerTitleAlign: 'center' }} />
+            <Stack.Screen name="ChangePassword" component={ChangePassword} options={{ title: 'Change Password', headerTitleAlign: 'center' }} />
         </Stack.Navigator>
     );
 }
@@ -45,9 +58,24 @@ function AuthStack() {
             <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
             <Stack.Screen name='ProductList' component={ProductList} options={{headerShown: false}}/>
           <Stack.Screen name='ProductInfo' component={ProductInfo} options={{headerShown: false}} />
+         
         </Stack.Navigator>
     )
  }
+
+
+ function CartComponent () {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name='CartTab' component={CartScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Address" component={Addresss} options={{ headerTitleAlign:'center', headerStyle:{backgroundColor:'white'} , headerTintColor:'black', headerTransparent:'true' , headerRight: ( () => <Add />)}} />
+
+        <Stack.Screen name= "AddAdress" component={AddAdress} options={{title:'Add New Address' , headerTitleAlign:'center' , headerStyle:{backgroundColor:'white'} , headerTintColor:'black', headerTransparent:'true'}}/>
+        <Stack.Screen name="CheckOut" component={CheckOut} options={{headerTitleAlign:'center'}}/>
+        </Stack.Navigator> 
+    )
+ }
+
 
 function TabNavigator() {
     return (
@@ -64,11 +92,13 @@ function TabNavigator() {
            
             <Tab.Screen
                 name='CartTab'
-                component={CartScreen}
+                component={CartComponent}
                 options={{
                     tabBarIcon: ({ color }) => <CartIcon name='shopping-cart' size={30} color={color} />,
                     tabBarLabel: 'Cart',
-                    headerShown: false
+                    headerShown: false,
+                    tabBarBadge: 1 ,
+                    tabBarBadgeStyle: {}
                 }}
             />
             <Tab.Screen
@@ -77,6 +107,7 @@ function TabNavigator() {
                 options={{
                     tabBarIcon: ({ color }) => <AccountIcon name='user' size={30} color={color} />,
                     tabBarLabel: 'Account',
+                    headerShown: false
                 }}
             />
         </Tab.Navigator>
@@ -101,6 +132,16 @@ const AllScreens = () => {
             </Stack.Navigator>
         </NavigationContainer>
     );
+}
+
+
+const Add= () => {
+    const navigation = useNavigation()
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate('AddAdress')}>
+            <Image source={require('../images/add.png')} style={{ height: 25, width: 25 }} />
+            </TouchableOpacity>
+    )
 }
 
 export default AllScreens;

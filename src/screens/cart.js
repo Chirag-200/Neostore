@@ -1,135 +1,200 @@
-import React from 'react';
-import { Image, Text, View, Dimensions, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, View, Dimensions, ScrollView, TouchableOpacity, Alert, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { addToCart } from '../redux/reducer';
+
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Button } from 'react-native-paper';
 
-const CartScreen = ({ route }) => {
-    const dispatch = useDispatch();
+const CartScreen = (props) => {
+    // const dispatch = useDispatch();
     const { height, width } = Dimensions.get('screen');
-    const cartItems = useSelector((state) => state.cart.items);
+    // const cartItems = useSelector((state) => state.cart.items);
+    const [cart, setCart] = useState([]);
+    const [total,setTotal] = useState(0)
+ 
+    useEffect(() => {
+        ListCartItems();
+    },[]);
 
-    const handleAdd = (item) => {
-        console.log("Adding item:", item);
-        dispatch(addToCart({ product: item.product, quantity: 1 }));
-        postCartItems(item.product.id, 1); 
-    };
+    // const handleQuantityChange = async (productId, quantityChange) => {
+    //     console.log("Current cart items:", cartItems); // Log current cart items
+    //     const item = cartItems.find(item => item.product.id === productId);
 
-    const handleSubtract = (item) => {
-        console.log("Subtracting item:", item);
-        if (item.quantity > 1) {
-            dispatch(addToCart({ product: item.product, quantity: -1 }));
-            postCartItems(item.product.id, -1); 
-        } else {
-            // Optionally handle removal from cart if quantity is 1
-            dispatch(addToCart({ product: item.product, quantity: -item.quantity }));
-            postCartItems(item.product.id, -item.quantity); // Remove from cart
-        }
-    };
+    //     if (item) {
+    //         const newQuantity = item.quantity + quantityChange;
 
-    
-    const handleQuantityChange = (productId, quantityChange) => {
-        console.log("Updating item:", productId, "Change:", quantityChange);
-        
-        if (quantityChange < 0) {
-            const item = cartItems.find(item => item.product.id === productId);
-            if (item.quantity + quantityChange <= 0) {
-                // Optionally remove the item if quantity becomes zero
-                dispatch(addToCart({ product: item.product, quantity: -item.quantity }));
-                postCartItems(productId, -item.quantity); // Remove from cart
-                return;
-            }
-        }
-    
-        dispatch(addToCart({ product: { id: productId }, quantity: quantityChange }));
-        postCartItems(productId, quantityChange);
-    };
-    
-
-    // const postCartItems = async (productId, quantity) => {
-    //     const data = new FormData();
-    //     data.append('product_id', productId);
-    //     data.append('quantity', quantity);
-
-    //     try {
-    //         const token = await AsyncStorage.getItem("access_token");
-    //         console.log("Token:", token);
-
-    //         const response = await axios.post('http://staging.php-dev.in:8844/trainingapp/api/addToCart', data, {
-    //             headers: {
-    //                 'Content-Type': 'multipart/form-data',
-    //                 'Authorization': `Bearer ${token}`, 
-    //             },
-    //         });
-
-    //         console.log('Response:', response.data);
-    //         Alert.alert('Success', 'Cart updated successfully!');
-    //     } catch (error) {
-    //         console.error('Error posting cart items:', error);
-    //         Alert.alert('Error', 'Failed to update cart item.');
+    //         if (newQuantity <= 0) {
+    //             // Remove item if quantity becomes zero
+    //             dispatch(addToCart({ product: item.product, quantity: -item.quantity }));
+    //             await postCartItems(productId, -item.quantity); // Remove from cart
+    //         } else {
+    //             dispatch(addToCart({ product: { id: productId }, quantity: quantityChange }));
+    //             await postCartItems(productId, quantityChange); // Update quantity
+    //         }
+    //     } else {
+    //         console.error('Item not found in cart:', productId);
+    //         Alert.alert('Error', `Item with ID ${productId} not found in cart.`);
     //     }
     // };
-    const postCartItems = async (productId, quantity) => {
-        const data = new FormData();
-        data.append('product_id', productId.toString()); // Convert to string
-        data.append('quantity', quantity.toString()); // Convert to string
+    async function handleDelete(id) {
+        console.log("Deleting item with ID:", id);
+        const formData = new FormData();
+        formData.append('product_id', id);
+    
+        const accessToken = await AsyncStorage.getItem('access_token');
+        console.log("Access Token:", accessToken);
     
         try {
-            const token = await AsyncStorage.getItem("access_token");
-            console.log("Token:", token);
+            const result = await axios.post(
+                'http://staging.php-dev.in:8844/trainingapp/api/deleteCart',
+                formData,
+                {
+                    headers: {
+                        'Content-Type' : 'multipart/form-data',                
+                                access_token: accessToken,
+                    },
+                }
+            );
     
-            const response = await axios.post('http://staging.php-dev.in:8844/trainingapp/api/addToCart', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'access_token': token, // Use the access_token as a header
-                },
-            });
+            console.log('Delete response:', result.data);
+            Alert.alert('Success', 'Item removed from cart.');
     
-            console.log('Response:', response.data);
-            Alert.alert('Success', 'Cart updated successfully!');
         } catch (error) {
-            console.error('Error posting cart items:', error.response ? error.response.data : error);
-            Alert.alert('Error', 'Failed to update cart item.');
+            console.log('Error deleting item:', error.response ? error.response.data : error.message);
+            Alert.alert('Error', error.response ? error.response.data.user_msg || 'Failed to remove item from cart.' : 'An unexpected error occurred.');
         }
-    };
-    const handleCheckout = async () => {
+    }
+    
+    
+    
 
-        for (const item of cartItems) {
-            await postCartItems(item.product.id, item.quantity); 
+    async function EditcartItems(id, quantity) {
+        
+        const formData = new FormData();
+        formData.append('product_id', id);
+        formData.append('quantity', quantity);
+        console.log("formData",formData)
+    
+        try {
+          const accessToken = await AsyncStorage.getItem('access_token');
+    
+          if (accessToken) {
+            let result = await axios.post(
+              `http://staging.php-dev.in:8844/trainingapp/api/editCart`,
+              formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  access_token: accessToken,
+                },
+              },
+            );
+            console.log('The cart edited data', result?.data);
+            // Alert.alert('Successfull');
+            Alert.alert(result.data.user_msg)
+            return result.data;
+          } else {
+            Alert.alert('Error');
+          }
+        } catch (error) {
+          console.log("err>>",error.response ? error.response.data : error.message);
+          Alert.alert(error.response.data.user_msg)
         }
-        Alert.alert('Checkout', 'All items have been sent to the API.');
+      }
+      
+
+      function QuantityChange(id, quantity, perform) {
+        let newQuantity = quantity;
+    
+        if (perform === 'increment') {
+            if (newQuantity >= 8) {
+                Alert.alert('Error', 'Quantity cannot exceed 8.');
+                return; // Exit the function early, do not call the API
+            }
+            newQuantity += 1; // Increment if below the limit
+        } else if (perform === 'decrement') {
+            if (newQuantity > 0) {
+                newQuantity -= 1;
+            } else {
+                console.log("Quantity cannot go below zero.");
+                return; 
+            }
+        } else {
+            console.log("Invalid operation. Use 'increment' or 'decrement'.");
+            return; 
+        }
+    
+       
+    EditcartItems(id, newQuantity)
+    .then(() => {
+        // Update local state after successful edit
+        setCart((prevCart) => 
+            prevCart.map(item => 
+                item.product.id === id ? { ...item, quantity: newQuantity } : item
+            )
+        );
+    });
+        console.log("newQuantity>>",newQuantity);
+    }
+
+    const ListCartItems = async () => {
+        const accessToken = '6711fde53ce53';
+        try {
+            const response = await axios.get('http://staging.php-dev.in:8844/trainingapp/api/cart', {
+                headers: {
+                    'access_token': accessToken,
+                }
+            });
+            setCart(response.data.data);
+            
+            // console.log("try   ",response.data.total)
+            // console.log("cart",cart)
+            setTotal(response.data.total)
+        } catch (error) {
+            // console.error('Error fetching data:', error);
+        }
     };
 
     return (
-        <ScrollView contentContainerStyle={{ justifyContent: "space-between", flex: 1 }}>
-            <View style={{ padding: 10 }}>
-                {cartItems.length > 0 ? (
-                    cartItems.map((item, index) => (
-                        <View key={index} style={{ flexDirection: 'row', borderWidth: 0.5, padding: 5, backgroundColor: 'white', marginBottom: 10, borderRadius: 15 }}>
-                            <Image source={{ uri: item.product.product_images[0]?.image }} style={{ height: height * 0.1, width: width * 0.3, marginLeft: 5 }} />
-                            <View style={{ flexDirection: 'column', paddingLeft: 20, flex: 1 }}>
-                                <Text style={{ fontFamily: 'Laila-Medium' }}>{item.product.name}</Text>
-                                <Text style={{ fontFamily: 'Laila-Regular', fontSize: 16 }}>₹{item.product.cost}</Text>
+        <ScrollView contentContainerStyle={{ justifyContent: "space-between", flexGrow: 1 }}>
+            <FlatList 
+                data={cart}
+                keyExtractor={item => item.id.toString()}
+                scrollEnabled={false}
+                renderItem={({ item }) => (
+                    <View style={{ flexDirection: 'row', borderWidth: 1, margin: 10, padding: 10 }}>
+                        <Image source={{ uri: item.product.product_images }} style={{ height: 90, width: 125 }} />
+                        <View style={{ marginLeft: 15, flexDirection: 'column' }}>
+                            <Text>{item.product.name}</Text>
+                            <Text style={{ marginTop: 15 }}>₹{item.product.cost}</Text>
+                            
+                            {console.log(item)}
+
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, alignItems: 'center' }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <TouchableOpacity onPress={() => QuantityChange(item.product.id , item.quantity , 'decrement')}>
+                                        <MaterialCommunityIcons name='minus-circle' size={30} color='blue' style={{ marginRight: 10 }} />
+                                    </TouchableOpacity>
+                                    <Text style={{ width: '30%', borderWidth: 0.5, textAlign: 'center', backgroundColor: 'lightgrey', padding: 2 }}>
+                                        {item.quantity}
+                                    </Text>
+                                    <TouchableOpacity onPress={() => QuantityChange(item.product.id , item?.quantity, 'increment')}>
+                                        <MaterialCommunityIcons name='plus-circle' size={30} color='blue' style={{ marginLeft: 10 }} />
+                                    </TouchableOpacity>
+                                    
+                                </View>
+                                
                             </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-                                <TouchableOpacity onPress={() => handleQuantityChange(item.product.id, -1)}>
-                                    <MaterialCommunityIcons name='minus-circle' size={30} color='blue' />
-                                </TouchableOpacity>
-                                <Text style={{ fontSize: 17, marginHorizontal: 10, width: width * 0.06, textAlign: 'center', justifyContent: 'center', height: height * 0.04, lineHeight: height * 0.04, fontFamily: 'Laila-Bold' }}>
-                                    {item.quantity}
-                                </Text>
-                                <TouchableOpacity  onPress={() => handleQuantityChange(item.product.id, -1)}>
-                                    <MaterialCommunityIcons name='plus-circle' size={30} color='blue' />
-                                </TouchableOpacity>
-                            </View>
+                            <Text>sub_total:  {item.product.sub_total}</Text>
                         </View>
-                    ))
-                ) : (
-                    <Text>No items in cart.</Text>
+                        <TouchableOpacity onPress={()=> handleDelete(item.product.id)}>
+                        <Text> Delete</Text>
+                        </TouchableOpacity>
+                    </View>
                 )}
-            </View>
+            />
 
             <View style={{
                 padding: 10,
@@ -144,14 +209,15 @@ const CartScreen = ({ route }) => {
                 shadowRadius: 5,
                 elevation: 5,
             }}>
+
                 <Text style={{ fontSize: 18, textAlign: 'center' }}>
-                    Total: ₹{cartItems.reduce((total, item) => total + item.product.cost * item.quantity, 0)}
+                    Total: ₹{total}
                 </Text>
-                <TouchableOpacity
+                <TouchableOpacity onPress={()=> props.navigation.navigate('Address')}
                     style={{ backgroundColor: '#007BFF', padding: 10, borderRadius: 5, marginTop: 10 }}
-                    onPress={handleCheckout} // Call the API for checkout
+
                 >
-                    <Text style={{ color: 'white', textAlign: 'center', fontSize: 16, borderRadius: 10, fontFamily: 'Laila-SemiBold' }}>Checkout</Text>
+                    <Text style={{ color: 'white', textAlign: 'center', fontSize: 16 }}>Checkout</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>

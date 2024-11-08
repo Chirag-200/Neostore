@@ -346,7 +346,6 @@ const RegisterScreen = () => {
 
       {passwordError && <Text style={{ color: 'red', marginTop: -15, marginBottom: 15 }}>{passwordError}</Text> }
 
-
       <TextInput
         label='Confirm Password'
         onBlur={() => confirmPasswordValidation(confirmPassword)}
