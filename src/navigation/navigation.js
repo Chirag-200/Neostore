@@ -25,6 +25,8 @@ import CheckOut from '../screens/checkout';
 import OrderList from '../screens/orderList';
 import OrderDetails from '../screens/orderDetails';
 import ChangePassword from '../screens/changepass';
+import Toast from 'react-native-toast-message';
+// import SearchIcon from 'react-native-vector-icons/EvilIcons'
 
 // import Address from '../Address';
 
@@ -55,6 +57,7 @@ function AuthStack() {
  function HomeComponent () {
     return (
         <Stack.Navigator>
+
             <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
             <Stack.Screen name='ProductList' component={ProductList} options={{headerShown: false}}/>
           <Stack.Screen name='ProductInfo' component={ProductInfo} options={{headerShown: false}} />
@@ -89,7 +92,18 @@ function TabNavigator() {
                     headerShown: false
                 }}
             />
-           
+              <Tab.Screen
+                name='SearchTab'
+                component={SearchScreen}
+                options={{
+                    tabBarIcon: ({ color }) => <SearchIcon name='magnifying-glass' size={30} color={color} />,
+                    tabBarLabel: 'Search',
+                    headerShown: false,
+
+
+                }}
+            />
+
             <Tab.Screen
                 name='CartTab'
                 component={CartComponent}
@@ -101,6 +115,8 @@ function TabNavigator() {
                     tabBarBadgeStyle: {}
                 }}
             />
+           
+          
             <Tab.Screen
                 name='AccountTab'
                 component={AccountStack}
@@ -130,6 +146,7 @@ const AllScreens = () => {
                     <Stack.Screen name='Auth' component={AuthStack} />
                 )}
             </Stack.Navigator>
+            
         </NavigationContainer>
     );
 }

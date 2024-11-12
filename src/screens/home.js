@@ -1,7 +1,12 @@
+import React, { useState,useEffect } from 'react';
+
 import { Text, TextInput, View, Image, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
-import React, { useState } from 'react';
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
+import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const images = [
   { id: 1, uri: require('/Users/neosoft1/Documents/NEOSTORE/neostore/src/images/table1.png') },
@@ -13,6 +18,32 @@ const HomeScreen = (props) => {
   // const navigation = useNavigation(); 
   const [productId, setProductId] = useState(null);
   const {height,width} = Dimensions.get('window')
+  const [hasShownToast, setHasShownToast] = useState(false);
+
+
+ 
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+        const hasLoggedIn = await AsyncStorage.getItem('hasLoggedIn');
+        // if (hasLoggedIn === 'true' && !hasShownToast) {
+            // Show toast once after successful login
+            Toast.show({
+                type: 'success',
+                text1: 'Login Successful',
+                position: 'bottom',
+                autoHide: false,
+            });
+
+            // Mark that toast has been shown
+            setHasShownToast(true);
+
+            // Remove the 'hasLoggedIn' flag to prevent the toast from showing again
+            await AsyncStorage.removeItem('hasLoggedIn');
+        // }
+    };
+
+    checkLoginStatus();
+}, [hasShownToast]); 
   
 
   const handlePress = (id) => {
@@ -25,7 +56,10 @@ const HomeScreen = (props) => {
 
   return (
     <ScrollView contentContainerStyle={{ paddingBottom: 20 }} style={{ flex: 1, backgroundColor: 'white' }}>
+                  <Toast ref={(ref) => Toast.setRef(ref)}  />
+
       <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+        
         <Text style={{ fontSize: 28, color: 'black' }}> Shop </Text>
         <View style={{ marginLeft: 50, backgroundColor: 'rgb(248,248,248)' }}>
           <TextInput

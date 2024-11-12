@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
 import { AuthContext } from '../AuthContext';
+import Toast from 'react-native-toast-message';
 
 const LoginScreen = ({ navigation }) => {
     const { login } = useContext(AuthContext); 
@@ -45,7 +46,8 @@ const LoginScreen = ({ navigation }) => {
         setShowPassword(!showPassword); // Toggle password visibility
     };
 
-    const loginUser = async () => {
+    const loginUser  = async () => {
+        
         const formDataToSend = new FormData();
         formDataToSend.append('email', formData.email);
         formDataToSend.append('password', formData.password);
@@ -58,16 +60,40 @@ const LoginScreen = ({ navigation }) => {
             );
 
             if (response.status === 200) {
-                Alert.alert('Login Successful');
+
+                    // Toast.show({
+                    //     type: 'success',
+                    //     text1: 'Login Successful',
+                    //     position: 'top',
+                    // });
+
+                    // setTimeout(() => {
+                    //     login(); // Or replace with your navigation function
+                    //     // navigation.navigate('Main'); // If you're using react-navigation
+                    // }, 1000);
+                    await AsyncStorage.setItem('hasLoggedIn', 'true'); // Set the flag
+
                 login(); 
-                navigation.navigate('Main'); 
+                // navigation.navigate('Main'); 
+                // Toast.show({
+                //     type: 'success',
+                //     text1: 'Login Successful',
+                //     position: 'top',
+                // });
+
                 const accessToken = response?.data?.data?.access_token;
                 AsyncStorage.setItem('access_token', accessToken);
-                console.log("loginnnnn:",accessToken)
+                console.log("loginnnnn:", accessToken);
             }
         } catch (error) {
             const message = error.response?.data?.message || 'Login Failed. Please try again later.';
             Alert.alert('Error', message);
+            Toast.show({
+                type: 'error',
+                text1: 'Login Failed',
+                text2: message,
+                position: 'top',
+            });
         }
     };
 
@@ -80,15 +106,13 @@ const LoginScreen = ({ navigation }) => {
             return;
         }
 
-        await loginUser();
+        await loginUser ();
     };
-
-    
 
     return (
         <ScrollView style={{ backgroundColor: 'white' }}>
             <View style={{ position: 'relative', width: 200, height: 200 }}>
-                <Image source={require('../images/bubble02.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
+                <Image source={ require('../images/bubble02.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
                 <Image source={require('../images/bubble01.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
             </View>
             <Image source={require('../images/bubblle03.png')} style={{ marginLeft: 324 }} />
@@ -142,6 +166,8 @@ const LoginScreen = ({ navigation }) => {
                 <Text>Don't have an account?</Text>
                 <Text style={{ color: '#0030FF' }} onPress={() => navigation.navigate('Register')}> Register</Text>
             </View>
+
+            <Toast ref={(ref) => Toast.setRef(ref)} />
         </ScrollView>
     );
 };

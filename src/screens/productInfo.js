@@ -1,29 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Text, View, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { Image, Text, View, Dimensions, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { AirbnbRating } from 'react-native-ratings';
-import SwiperFlatList from 'react-native-swiper-flatlist';
 import EyeIcon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProductInfo = (props) => {
     const productId = props?.route?.params?.productId;
     const [productInfo, setProductInfo] = useState({});
+    const [allProducts, setAllProducts] = useState([]);
     const { height, width } = Dimensions.get('screen');
     const [count, setCount] = useState(0);
 
-
+    // Function to fetch product details and all products
     async function fetchProductInfo() {
         try {
+            // Fetch the product details based on the productId
             const response = await fetch(`http://staging.php-dev.in:8844/trainingapp/api/products/getDetail?product_id=${productId}`);
             if (!response.ok) {
-                throw new Error(`status : ${response.status}`);
+                throw new Error(`status: ${response.status}`);
             }
             const data = await response.json();
-            setProductInfo(data?.data); // No need to wrap in an array
+            setProductInfo(data?.data);  // Set the product details
+
+            // Fetch all products from the API
+            const allProductsResponse = await fetch(`http://staging.php-dev.in:8844/trainingapp/api/products/getList?product_category_id=1`);
+            if (!allProductsResponse.ok) {
+                throw new Error(`status: ${allProductsResponse.status}`);
+            }
+            const allProductsData = await allProductsResponse.json();
+
+            // Filter out the current product from the list of all products
+            const filteredProducts = allProductsData?.data?.filter(item => item.id !== productId);
+            setAllProducts(filteredProducts);  // Set the filtered products
         } catch (error) {
             console.log(error);
         }
@@ -33,6 +43,7 @@ const ProductInfo = (props) => {
         fetchProductInfo();
     }, []);
 
+    // Quantity handling functions
     const handleMinus = () => {
         setCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0));
     };
@@ -41,49 +52,85 @@ const ProductInfo = (props) => {
         setCount(prevCount => prevCount + 1);
     };
 
-   
-    
-        const addQuantity = async () => {
-            if (count <= 0) {
-                Alert.alert('Invalid Quantity', 'Please add at least one item.');
-                return;
-            }
-        
-            const token = await AsyncStorage.getItem('access_token');
-            console.log('Access Token:', token); // Log the token for debugging
-            if (!token) {
-                Alert.alert('Error', 'No access token found.');
-                return;
-            }
-        
-            // dispatch(addToCart({ product: productInfo, quantity: count }));
-        
-            const data = new FormData();
-            data.append('product_id', productInfo.id);
-            data.append('quantity', count);
-        
-            try {
-                const result = await axios.post(
-                    'http://staging.php-dev.in:8844/trainingapp/api/addToCart',
-                    data,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                            access_token: token
-                        }
+    const addQuantity = async () => {
+        if (count <= 0) {
+            Alert.alert('Invalid Quantity', 'Please add at least one item.');
+            return;
+        }
+
+        const token = await AsyncStorage.getItem('access_token');
+        if (!token) {
+            Alert.alert('Error', 'No access token found.');
+            return;
+        }
+
+        const data = new FormData();
+        data.append('product_id', productInfo.id);
+        data.append('quantity', count);
+
+        try {
+            const result = await axios.post(
+                'http://staging.php-dev.in:8844/trainingapp/api/addToCart',
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        access_token: token
                     }
-                );
-                console.log("Success:", result.data);
-                Alert.alert('Success', 'Item added to cart!');
-            } catch (error) {
-                console.error("Error occurred:", error.response?.data || error.message);
-                Alert.alert('Error', error.response?.data?.message || 'An unknown error occurred.');
-            }
-        };
-        
-    
+                }
+            );
+            Alert.alert('Success', 'Item added to cart!');
+        } catch (error) {
+            console.error("Error occurred:", error.response?.data || error.message);
+            Alert.alert('Error', error.response?.data?.message || 'An unknown error occurred.');
+        }
+    };
+
+    // Render similar products
+    const renderSimilarProduct = ({ item }) => (
+        <TouchableOpacity 
+            onPress={() => props.navigation.navigate('ProductInfo', { productId: item.id })}
+            style={{
+                margin: 10, 
+                borderWidth: 0.5, 
+                borderRadius: 10, 
+                padding: 10, 
+                backgroundColor: 'white', 
+                alignItems: 'center'
+            }}
+        >
+            <Image
+                source={{ uri: item.product_images?.image }} // Display first image
+                style={{ height: 80, width: 80, marginRight: 10 }}
+                resizeMode="contain"
+            />
+            <View style={{ flex: 1 }}>
+                <Text style={{ fontFamily: 'Laila-SemiBold' }}>{item.name}</Text>
+                <AirbnbRating
+                    count={5}
+                    defaultRating={item.rating}
+                    size={12}
+                    showRating={false}
+                    isDisabled={true}
+                />
+                <Text style={{ color: 'blue' }}>₹{item.cost}</Text>
+            </View>
+        </TouchableOpacity>
+    );
+
+    // Render Product Images using FlatList
+    const renderProductImage = ({ item }) => (
+        <View style={{ height: height * 0.3, width: width, alignItems: "center", justifyContent: "center" }}>
+            <Image
+                source={{ uri: item.image }}
+                style={{ height: 200, width: 300 }}
+                resizeMode='contain'
+            />
+        </View>
+    );
+
     return (
-        <View style={{ backgroundColor: 'white', padding: 10 }}>
+        <View style={{ backgroundColor: 'white', padding: 10, flex: 1 }}>
             <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
                 style={{ marginTop: height * 0.015, alignItems: 'center', borderWidth: 1, borderRadius: 18, width: width * 0.07 }}
@@ -94,24 +141,12 @@ const ProductInfo = (props) => {
             {productInfo.product_images?.length > 0 ? (
                 <View>
                     <View style={{ alignItems: "center" }}>
-                        <SwiperFlatList
+                        <FlatList
                             data={productInfo.product_images}
                             keyExtractor={(item, index) => index.toString()}
-                            showPagination
-                            paginationStyle={{ justifyContent: 'center', alignItems: 'center' }}
-                            paginationActiveColor="blue"
-                            paginationDefaultColor="grey"
-                            paginationStyleItem={{
-                                height: 10,
-                                width: 10,
-                                padding: 5,
-                                marginTop: 3,
-                            }}
-                            renderItem={({ item }) => (
-                                <View style={{ height: height * 0.3, width: width, alignItems: "center", justifyContent: "center" }}>
-                                    <Image source={{ uri: item.image }} style={{ height: 200, width: 300 }} resizeMode='contain' />
-                                </View>
-                            )}
+                            renderItem={renderProductImage}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
                         />
                     </View>
 
@@ -143,7 +178,7 @@ const ProductInfo = (props) => {
                             <TouchableOpacity onPress={handleMinus}>
                                 <MaterialCommunityIcons name='minus-circle' size={30} color='blue' style={{ marginRight: 10 }} />
                             </TouchableOpacity>
-                            <Text style={{ width: '25%', borderWidth: 0.5, textAlign: 'center', backgroundColor: 'lightgrey' }}>{count}</Text>
+                            <Text style={{ width: '25%', borderWidth: 0.5, textAlign: 'center', backgroundColor: 'lightgrey', paddingTop: 5 }}>{count}</Text>
                             <TouchableOpacity onPress={handlePlus}>
                                 <MaterialCommunityIcons name='plus-circle' size={30} color='blue' style={{ marginLeft: 10 }} />
                             </TouchableOpacity>
@@ -157,7 +192,21 @@ const ProductInfo = (props) => {
                         <Text style={{ fontFamily: 'Laila-SemiBold', textAlign: 'center', color: 'white' }}> Add to Cart </Text>
                     </TouchableOpacity>
 
-                    <Text>Similar Products</Text>
+                    {/* All Products Section */}
+                    {allProducts.length > 0 && (
+                        <View>
+                            <Text style={{ fontFamily: 'Laila-SemiBold', color: 'black', fontSize: 20, marginTop: 20 }}>
+                                Other Products
+                            </Text>
+                            <FlatList
+                                data={allProducts}
+                                keyExtractor={item => item.id.toString()}
+                                renderItem={renderSimilarProduct}
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                            />
+                        </View>
+                    )}
                 </View>
             ) : (
                 <Text>No images available</Text>

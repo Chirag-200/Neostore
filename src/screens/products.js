@@ -761,9 +761,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 import EyeIcon from 'react-native-vector-icons/Ionicons'
 import { AirbnbRating } from 'react-native-ratings'
+import AccountScreenQ from './account'
 
 
 const ProductList = ({route , navigation}) => {
+  // console.log(props)
   const {height,width} = Dimensions.get('screen')
   const [productData,setProductData] = useState([])
   const [currentPage, SetCurrentPage] = useState(1)
@@ -846,16 +848,14 @@ const ProductList = ({route , navigation}) => {
 
   },[])
   return (
-    <View style = {{flex:1 , backgroundColor: 'white'}}>
+    <View style = {{flex:1 , backgroundColor: 'white', padding: 5}}>
       <View style = {{ marginTop: height*0.01, marginLeft: width*0.02}}>
       <TouchableOpacity
-                    onPress={() => navigation.goBack()}
-                    style={{ borderWidth:1, width: width* 0.06, borderRadius: 15}}
-                >
-                    <EyeIcon name='arrow-back' size={20} color='black' />
-
-                </TouchableOpacity>
-
+                onPress={() => navigation.goBack()}
+                style={{ marginTop: height * 0.015, alignItems: 'center', borderWidth: 1, borderRadius: 18, width: width * 0.07 }}
+            >
+                <EyeIcon name='arrow-back' size={20} color='black' />
+            </TouchableOpacity>
       </View>
     
 
@@ -881,6 +881,7 @@ const ProductList = ({route , navigation}) => {
       
       />
       </>
+      
 
       </View>
 
