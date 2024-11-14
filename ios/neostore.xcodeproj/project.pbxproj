@@ -8,23 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* neostoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* neostoreTests.m */; };
-		0C80B921A6F3F58F76C31292 /* libPods-neostore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-neostore.a */; };
+		0B2C692B953C4A25BC3D4BE0 /* FiraCode-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50F1491A442042FFA52F6318 /* FiraCode-SemiBold.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7699B88040F8A987B510C191 /* libPods-neostore-neostoreTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-neostore-neostoreTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		39C068C4B9994C45AA125EE6 /* FiraCode-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0E9111217534FD6A8AC2241 /* FiraCode-Bold.ttf */; };
-		8F39645C60E64FAB9BA9E4DB /* FiraCode-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F251CB03ABB04E979B9722B2 /* FiraCode-Light.ttf */; };
 		1C3A5E2012ED4C97AC95818B /* FiraCode-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42CC7F4603084B04B801E96A /* FiraCode-Medium.ttf */; };
+		25D5BFE397D141F6941A87FF /* Laila-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 989650D6DC974A43B1179EC8 /* Laila-Regular.ttf */; };
 		2C3F01A885C74A9FBD59AE45 /* FiraCode-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98F986D38444653A2280C1D /* FiraCode-Regular.ttf */; };
-		0B2C692B953C4A25BC3D4BE0 /* FiraCode-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50F1491A442042FFA52F6318 /* FiraCode-SemiBold.ttf */; };
+		310C1F935EA14EAB895EC1B2 /* Laila-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC5A57C360154689AF19B123 /* Laila-SemiBold.ttf */; };
+		341395D95B084C94BD080E6D /* Laila-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E32460932A5E4527ADA56199 /* Laila-Medium.ttf */; };
+		39C068C4B9994C45AA125EE6 /* FiraCode-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0E9111217534FD6A8AC2241 /* FiraCode-Bold.ttf */; };
+		6408D7E0BB42370A3769E9F5 /* Pods_neostoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095EA1CA5E49123266204999 /* Pods_neostoreTests.framework */; };
 		7BB73E6775374D85BD8EB356 /* Italianno-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 453E83F93D96432AB3E3C2F4 /* Italianno-Regular.ttf */; };
+		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8F39645C60E64FAB9BA9E4DB /* FiraCode-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F251CB03ABB04E979B9722B2 /* FiraCode-Light.ttf */; };
 		A0D2A68290E74C8DBA0A20C7 /* Laila-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC84FCE23D774194A4E2208A /* Laila-Bold.ttf */; };
 		B92ABC4C61824668ABCF3EB9 /* Laila-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1661D8862EA845E7A8C728F0 /* Laila-Light.ttf */; };
-		341395D95B084C94BD080E6D /* Laila-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E32460932A5E4527ADA56199 /* Laila-Medium.ttf */; };
-		25D5BFE397D141F6941A87FF /* Laila-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 989650D6DC974A43B1179EC8 /* Laila-Regular.ttf */; };
-		310C1F935EA14EAB895EC1B2 /* Laila-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC5A57C360154689AF19B123 /* Laila-SemiBold.ttf */; };
+		F77793813570B89B2908133F /* Pods_neostore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2D9A36CB916AF710BCB3001 /* Pods_neostore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +41,8 @@
 		00E356EE1AD99517003FC87E /* neostoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = neostoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* neostoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = neostoreTests.m; sourceTree = "<group>"; };
+		04CCE188A1D7557CF9196F39 /* Pods-neostoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostoreTests.debug.xcconfig"; path = "Target Support Files/Pods-neostoreTests/Pods-neostoreTests.debug.xcconfig"; sourceTree = "<group>"; };
+		095EA1CA5E49123266204999 /* Pods_neostoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_neostoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* neostore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = neostore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = neostore/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = neostore/AppDelegate.mm; sourceTree = "<group>"; };
@@ -48,25 +50,23 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = neostore/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = neostore/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = neostore/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-neostore-neostoreTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-neostore-neostoreTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B4392A12AC88292D35C810B /* Pods-neostore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostore.debug.xcconfig"; path = "Target Support Files/Pods-neostore/Pods-neostore.debug.xcconfig"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-neostore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostore.release.xcconfig"; path = "Target Support Files/Pods-neostore/Pods-neostore.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-neostore-neostoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostore-neostoreTests.debug.xcconfig"; path = "Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-neostore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-neostore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1661D8862EA845E7A8C728F0 /* Laila-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Laila-Light.ttf"; path = "../assets/fonts/Laila-Light.ttf"; sourceTree = "<group>"; };
+		42CC7F4603084B04B801E96A /* FiraCode-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraCode-Medium.ttf"; path = "../assets/fonts/FiraCode-Medium.ttf"; sourceTree = "<group>"; };
+		453E83F93D96432AB3E3C2F4 /* Italianno-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Italianno-Regular.ttf"; path = "../assets/fonts/Italianno-Regular.ttf"; sourceTree = "<group>"; };
+		50F1491A442042FFA52F6318 /* FiraCode-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraCode-SemiBold.ttf"; path = "../assets/fonts/FiraCode-SemiBold.ttf"; sourceTree = "<group>"; };
+		5DB26CB80255E50F69E4A369 /* Pods-neostore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostore.release.xcconfig"; path = "Target Support Files/Pods-neostore/Pods-neostore.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = neostore/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-neostore-neostoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostore-neostoreTests.release.xcconfig"; path = "Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		989650D6DC974A43B1179EC8 /* Laila-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Laila-Regular.ttf"; path = "../assets/fonts/Laila-Regular.ttf"; sourceTree = "<group>"; };
+		BC84FCE23D774194A4E2208A /* Laila-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Laila-Bold.ttf"; path = "../assets/fonts/Laila-Bold.ttf"; sourceTree = "<group>"; };
+		C0E9111217534FD6A8AC2241 /* FiraCode-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraCode-Bold.ttf"; path = "../assets/fonts/FiraCode-Bold.ttf"; sourceTree = "<group>"; };
+		E32460932A5E4527ADA56199 /* Laila-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Laila-Medium.ttf"; path = "../assets/fonts/Laila-Medium.ttf"; sourceTree = "<group>"; };
+		E98F986D38444653A2280C1D /* FiraCode-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraCode-Regular.ttf"; path = "../assets/fonts/FiraCode-Regular.ttf"; sourceTree = "<group>"; };
+		EC5A57C360154689AF19B123 /* Laila-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Laila-SemiBold.ttf"; path = "../assets/fonts/Laila-SemiBold.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		C0E9111217534FD6A8AC2241 /* FiraCode-Bold.ttf */ = {isa = PBXFileReference; name = "FiraCode-Bold.ttf"; path = "../assets/fonts/FiraCode-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F251CB03ABB04E979B9722B2 /* FiraCode-Light.ttf */ = {isa = PBXFileReference; name = "FiraCode-Light.ttf"; path = "../assets/fonts/FiraCode-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		42CC7F4603084B04B801E96A /* FiraCode-Medium.ttf */ = {isa = PBXFileReference; name = "FiraCode-Medium.ttf"; path = "../assets/fonts/FiraCode-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E98F986D38444653A2280C1D /* FiraCode-Regular.ttf */ = {isa = PBXFileReference; name = "FiraCode-Regular.ttf"; path = "../assets/fonts/FiraCode-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		50F1491A442042FFA52F6318 /* FiraCode-SemiBold.ttf */ = {isa = PBXFileReference; name = "FiraCode-SemiBold.ttf"; path = "../assets/fonts/FiraCode-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		453E83F93D96432AB3E3C2F4 /* Italianno-Regular.ttf */ = {isa = PBXFileReference; name = "Italianno-Regular.ttf"; path = "../assets/fonts/Italianno-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BC84FCE23D774194A4E2208A /* Laila-Bold.ttf */ = {isa = PBXFileReference; name = "Laila-Bold.ttf"; path = "../assets/fonts/Laila-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1661D8862EA845E7A8C728F0 /* Laila-Light.ttf */ = {isa = PBXFileReference; name = "Laila-Light.ttf"; path = "../assets/fonts/Laila-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E32460932A5E4527ADA56199 /* Laila-Medium.ttf */ = {isa = PBXFileReference; name = "Laila-Medium.ttf"; path = "../assets/fonts/Laila-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		989650D6DC974A43B1179EC8 /* Laila-Regular.ttf */ = {isa = PBXFileReference; name = "Laila-Regular.ttf"; path = "../assets/fonts/Laila-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EC5A57C360154689AF19B123 /* Laila-SemiBold.ttf */ = {isa = PBXFileReference; name = "Laila-SemiBold.ttf"; path = "../assets/fonts/Laila-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F251CB03ABB04E979B9722B2 /* FiraCode-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraCode-Light.ttf"; path = "../assets/fonts/FiraCode-Light.ttf"; sourceTree = "<group>"; };
+		F2D9A36CB916AF710BCB3001 /* Pods_neostore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_neostore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB01F0005A39B65FFD8DCF3 /* Pods-neostore.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostore.debug.xcconfig"; path = "Target Support Files/Pods-neostore/Pods-neostore.debug.xcconfig"; sourceTree = "<group>"; };
+		FEFF9A6D971BBBC5F3A9FE47 /* Pods-neostoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-neostoreTests.release.xcconfig"; path = "Target Support Files/Pods-neostoreTests/Pods-neostoreTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-neostore-neostoreTests.a in Frameworks */,
+				6408D7E0BB42370A3769E9F5 /* Pods_neostoreTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-neostore.a in Frameworks */,
+				F77793813570B89B2908133F /* Pods_neostore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,10 +124,28 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-neostore.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-neostore-neostoreTests.a */,
+				F2D9A36CB916AF710BCB3001 /* Pods_neostore.framework */,
+				095EA1CA5E49123266204999 /* Pods_neostoreTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7CAAC6C9E71545E8B09FA570 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C0E9111217534FD6A8AC2241 /* FiraCode-Bold.ttf */,
+				F251CB03ABB04E979B9722B2 /* FiraCode-Light.ttf */,
+				42CC7F4603084B04B801E96A /* FiraCode-Medium.ttf */,
+				E98F986D38444653A2280C1D /* FiraCode-Regular.ttf */,
+				50F1491A442042FFA52F6318 /* FiraCode-SemiBold.ttf */,
+				453E83F93D96432AB3E3C2F4 /* Italianno-Regular.ttf */,
+				BC84FCE23D774194A4E2208A /* Laila-Bold.ttf */,
+				1661D8862EA845E7A8C728F0 /* Laila-Light.ttf */,
+				E32460932A5E4527ADA56199 /* Laila-Medium.ttf */,
+				989650D6DC974A43B1179EC8 /* Laila-Regular.ttf */,
+				EC5A57C360154689AF19B123 /* Laila-SemiBold.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -145,8 +163,8 @@
 				00E356EF1AD99517003FC87E /* neostoreTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				7CAAC6C9E71545E8B09FA570 /* Resources */,
+				E2F2D91275470CDD8BFC3D2C /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -162,35 +180,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
+		E2F2D91275470CDD8BFC3D2C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-neostore.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-neostore.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-neostore-neostoreTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-neostore-neostoreTests.release.xcconfig */,
+				FCB01F0005A39B65FFD8DCF3 /* Pods-neostore.debug.xcconfig */,
+				5DB26CB80255E50F69E4A369 /* Pods-neostore.release.xcconfig */,
+				04CCE188A1D7557CF9196F39 /* Pods-neostoreTests.debug.xcconfig */,
+				FEFF9A6D971BBBC5F3A9FE47 /* Pods-neostoreTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		7CAAC6C9E71545E8B09FA570 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				C0E9111217534FD6A8AC2241 /* FiraCode-Bold.ttf */,
-				F251CB03ABB04E979B9722B2 /* FiraCode-Light.ttf */,
-				42CC7F4603084B04B801E96A /* FiraCode-Medium.ttf */,
-				E98F986D38444653A2280C1D /* FiraCode-Regular.ttf */,
-				50F1491A442042FFA52F6318 /* FiraCode-SemiBold.ttf */,
-				453E83F93D96432AB3E3C2F4 /* Italianno-Regular.ttf */,
-				BC84FCE23D774194A4E2208A /* Laila-Bold.ttf */,
-				1661D8862EA845E7A8C728F0 /* Laila-Light.ttf */,
-				E32460932A5E4527ADA56199 /* Laila-Medium.ttf */,
-				989650D6DC974A43B1179EC8 /* Laila-Regular.ttf */,
-				EC5A57C360154689AF19B123 /* Laila-SemiBold.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -199,12 +198,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "neostoreTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				B082D27F05E673FC89D7C341 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,13 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "neostore" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				15ECD4B031808B000A62AE75 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -320,46 +315,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore/Pods-neostore-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore/Pods-neostore-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-neostore/Pods-neostore-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-neostore-neostoreTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		15ECD4B031808B000A62AE75 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -381,55 +337,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		B082D27F05E673FC89D7C341 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-neostoreTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore/Pods-neostore-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore/Pods-neostore-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-neostore/Pods-neostore-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-neostore-neostoreTests/Pods-neostore-neostoreTests-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -465,7 +392,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-neostore-neostoreTests.debug.xcconfig */;
+			baseConfigurationReference = 04CCE188A1D7557CF9196F39 /* Pods-neostoreTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -492,7 +419,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-neostore-neostoreTests.release.xcconfig */;
+			baseConfigurationReference = FEFF9A6D971BBBC5F3A9FE47 /* Pods-neostoreTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -516,13 +443,14 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-neostore.debug.xcconfig */;
+			baseConfigurationReference = FCB01F0005A39B65FFD8DCF3 /* Pods-neostore.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = neostore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -543,12 +471,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-neostore.release.xcconfig */;
+			baseConfigurationReference = 5DB26CB80255E50F69E4A369 /* Pods-neostore.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = neostore/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

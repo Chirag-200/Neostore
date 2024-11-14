@@ -87,7 +87,7 @@ function TabNavigator() {
                 name='HomeTab'
                 component={HomeComponent}
                 options={{
-                    tabBarIcon: ({ color }) => <HomeIcon name='home' size={30} color={color} />,
+                    tabBarIcon: ({ color }) => <HomeIcon name='home' size={24} color={color} />,
                     tabBarLabel: 'Home',
                     headerShown: false
                 }}
@@ -96,7 +96,7 @@ function TabNavigator() {
                 name='SearchTab'
                 component={SearchScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <SearchIcon name='magnifying-glass' size={30} color={color} />,
+                    tabBarIcon: ({ color }) => <SearchIcon name='magnifying-glass' size={24} color={color} />,
                     tabBarLabel: 'Search',
                     headerShown: false,
 
@@ -108,7 +108,7 @@ function TabNavigator() {
                 name='CartTab'
                 component={CartComponent}
                 options={{
-                    tabBarIcon: ({ color }) => <CartIcon name='shopping-cart' size={30} color={color} />,
+                    tabBarIcon: ({ color }) => <CartIcon name='shopping-cart' size={24} color={color} />,
                     tabBarLabel: 'Cart',
                     headerShown: false,
                     tabBarBadge: 1 ,
@@ -121,7 +121,7 @@ function TabNavigator() {
                 name='AccountTab'
                 component={AccountStack}
                 options={{
-                    tabBarIcon: ({ color }) => <AccountIcon name='user' size={30} color={color} />,
+                    tabBarIcon: ({ color }) => <AccountIcon name='user' size={24} color={color} />,
                     tabBarLabel: 'Account',
                     headerShown: false
                 }}

@@ -4,7 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { TextInput } from 'react-native-paper';
 import { AuthContext } from '../AuthContext';
-import Toast from 'react-native-toast-message';
+
+import LinearGradient from 'react-native-linear-gradient'
 
 const LoginScreen = ({ navigation }) => {
     const { login } = useContext(AuthContext); 
@@ -88,12 +89,12 @@ const LoginScreen = ({ navigation }) => {
         } catch (error) {
             const message = error.response?.data?.message || 'Login Failed. Please try again later.';
             Alert.alert('Error', message);
-            Toast.show({
-                type: 'error',
-                text1: 'Login Failed',
-                text2: message,
-                position: 'top',
-            });
+            // Toast.show({
+            //     type: 'error',
+            //     text1: 'Login Failed',
+            //     text2: message,
+            //     position: 'top',
+            // });
         }
     };
 
@@ -110,24 +111,31 @@ const LoginScreen = ({ navigation }) => {
     };
 
     return (
-        <ScrollView style={{ backgroundColor: 'white' }}>
-            <View style={{ position: 'relative', width: 200, height: 200 }}>
+        <ScrollView >
+            {/* <View style={{ position: 'relative', width: 200, height: 200 }}>
                 <Image source={ require('../images/bubble02.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
                 <Image source={require('../images/bubble01.png')} style={{ position: 'absolute', width: '100%', height: '100%' }} />
             </View>
-            <Image source={require('../images/bubblle03.png')} style={{ marginLeft: 324 }} />
+            <Image source={require('../images/bubblle03.png')} style={{ marginLeft: 324 }} /> */}
 
-            <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: 10 }}>
-                <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Laila-Bold' }}>NEO</Text>
-                <Text style={{ fontSize: 30, color: 'black', fontFamily: 'Laila-Bold' }}>STORE</Text>
+            <View style={{ flexDirection: "row", flex:1}}>
+                <LinearGradient colors={['rgb(4,61,50)' , 'rgb(16,114,46)']} style = {{width:'100%', padding: 5, paddingLeft:10}}  start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                <Text style={{ fontSize: 27, color: 'white', fontFamily: 'Laila-Bold', textDecorationLine:'underline', }}>NeoStore</Text>
+                </LinearGradient>
+
             </View>
 
-            <View style={{ margin: 15 }}>
+            <Text style = {{marginHorizontal:10, top:15, fontSize: 22, fontFamily: 'Laila-SemiBold', color: 'black'}}>Welcome</Text>
+            
+            
+            
+            <View style = {{ flex:1 , top:30 , borderWidth:0.5, marginHorizontal:10, borderRadius:10, backgroundColor:'white'}}>
+            <View style = {{marginHorizontal:10 , top:20}} >
                 <TextInput
                     label='Email'
                     mode='outlined'
                     activeOutlineColor='blue'
-                    left={<TextInput.Icon color='#0030FF' icon='email' size={30} />}
+                    left={<TextInput.Icon color='rgb(15,105,189)' icon='email' size={30} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
                     value={formData.email}
                     onChangeText={(text) => setFormData(prev => ({ ...prev, email: text }))}
@@ -139,8 +147,8 @@ const LoginScreen = ({ navigation }) => {
                     label='Password'
                     mode='outlined'
                     activeOutlineColor='blue'
-                    left={<TextInput.Icon color='#0030FF' icon='account-lock-outline' size={30} />}
-                    right={<TextInput.Icon color='blue' icon={showPassword ? 'eye' : 'eye-off'} size={30} onPress={togglePasswordVisibility} />}
+                    left={<TextInput.Icon color='rgb(15,105,189)' icon='account-lock-outline' size={30} />}
+                    right={<TextInput.Icon color='rgb(15,105,189)' icon={showPassword ? 'eye' : 'eye-off'} size={30} onPress={togglePasswordVisibility} />}
                     style={{ marginBottom: 15, backgroundColor: 'white' }}
                     secureTextEntry={!showPassword} // Toggle secureTextEntry based on state
                     value={formData.password} 
@@ -150,24 +158,25 @@ const LoginScreen = ({ navigation }) => {
                 {formData.passwordError ? <Text style={{ color: 'red' }}>{formData.passwordError}</Text> : null}
             </View>
 
-            <View style={{ marginLeft: 20, marginRight: 20 }}>
-                <TouchableOpacity onPress={handleSubmit} style={{ padding: 10, backgroundColor: '#0030FF', borderRadius: 50 }}>
-                    <Text style={{ fontSize: 20, color: 'white', textAlign: 'center' }}>Sign In</Text>
+            <View style={{ marginLeft: 20, marginRight: 20, top:20 }}>
+                <TouchableOpacity onPress={handleSubmit} style={{ padding: 10, backgroundColor: 'rgb(254,215,54)', borderRadius: 10 }}>
+                    <Text style={{ fontSize: 20, color: 'black', textAlign: 'center' }}>Sign In</Text>
                 </TouchableOpacity>
             </View>
 
-            <View>
-                <Text style={{ fontSize: 14, textAlign: 'right', marginRight: 20, color: '#0030FF' }} onPress={() => navigation.navigate('ForgetPassword')}>
+            <View style = {{top:30}}>
+                <Text style={{ fontSize: 14, textAlign: 'right', marginRight: 20, color: 'rgb(15,105,189)' }} onPress={() => navigation.navigate('ForgetPassword')}>
                     Forget Password?
                 </Text>
             </View>
 
-            <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
+            <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'center', marginTop: 40 , marginBottom:30}}>
                 <Text>Don't have an account?</Text>
-                <Text style={{ color: '#0030FF' }} onPress={() => navigation.navigate('Register')}> Register</Text>
+                <Text style={{ color: 'rgb(15,105,189)' }} onPress={() => navigation.navigate('Register')}> Register</Text>
             </View>
 
-            <Toast ref={(ref) => Toast.setRef(ref)} />
+            {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
+            </View>
         </ScrollView>
     );
 };

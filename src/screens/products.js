@@ -756,12 +756,14 @@
 
 
 import React, { useEffect, useState } from 'react' 
-import { ActivityIndicator, FlatList, Image, Text , TouchableOpacity, View , Dimensions} from 'react-native'
+import { ActivityIndicator, FlatList, Image, Text , TouchableOpacity, View , Dimensions, TextInput} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 import EyeIcon from 'react-native-vector-icons/Ionicons'
 import { AirbnbRating } from 'react-native-ratings'
 import AccountScreenQ from './account'
+import LinearGradient from 'react-native-linear-gradient'
+
 
 
 const ProductList = ({route , navigation}) => {
@@ -805,7 +807,9 @@ const ProductList = ({route , navigation}) => {
   const renderProductData = ( {item} ) => {
     return (
     // console.log(item)
-    <View style = {{ borderWidth: 0.75, margin: 10, borderRadius: 15 , flexDirection: "row" , overflow: 'hidden', alignItems: 'center'}}  >
+
+    
+    <View style = {{ borderWidth: 0.75, margin: 10, borderRadius: 15 , flexDirection: "row" , overflow: 'hidden', alignItems: 'center', marginHorizontal:12}}  >
       <TouchableOpacity style= {{flexDirection: 'row'}} onPress = {() => navigation.navigate('ProductInfo' , { productId: item.id})}>
      
     <Image source = {{uri: item.product_images}} style = {{height: 100, width: 150 , marginTop: 20, marginLeft: 10, marginRight: 10}} resizeMode='contain'/>
@@ -814,10 +818,10 @@ const ProductList = ({route , navigation}) => {
       } 
         <View style = {{flexDirection: 'column' , paddingTop: 5}}>
         <Text style = {{fontFamily: 'Laila-Regular'}}> { item.producer}</Text>
-        <Text style = {{fontFamily: 'Laila-SemiBold'}}> { item.name}</Text>
+        <Text style = {{fontFamily: 'Laila-SemiBold', color:'black'}}> { item.name}</Text>
         <View style = {{flexDirection: 'row'}}>
           <EyeIcon name='eye' size={20} color='black' />
-        <Text> {item.view_count }</Text>
+        <Text style ={{fontFamily:'Laila-Medium'}}> {item.view_count }</Text>
         </View>
         <View style = {{alignItems: 'flex-start'}}>
         <AirbnbRating 
@@ -830,11 +834,14 @@ const ProductList = ({route , navigation}) => {
 
 
         <View style = {{flexDirection: 'row' , alignContent: 'center'}}>
-        <Text style = {{color: 'blue', fontSize: 16}}> ₹{ item.cost}</Text> 
-        <Text style = {{textDecorationLine: 'line-through', fontSize: 14 , marginTop: 2, marginLeft: 5}}> ₹{ item.cost}</Text> 
+        <Text style = {{color: 'blue', fontSize: 16,fontFamily:'Laila-Medium'}}> ₹{ item.cost}</Text> 
+        <Text style = {{textDecorationLine: 'line-through', fontSize: 14 , marginTop: 2, marginLeft: 5,fontFamily:'Laila-Medium'}}> ₹{ item.cost}</Text> 
         </View>
 
-        <Text style = {{ width: 200, fontSize: 13 , marginBottom:15}}  numberOfLines={1} ellipsizeMode='tail'> { item.description}</Text>
+        <Text style = {{ width: 200, fontSize: 13,fontFamily:'Laila-Regular' }}  numberOfLines={1} ellipsizeMode='tail'> { item.description}</Text>
+
+
+        <Text style = {{fontFamily:'Laila-SemiBold' , borderWidth:0.2, marginBottom:10, marginHorizontal:30, textAlign:'center', marginTop:5, borderRadius:10, color:'black', backgroundColor:'rgb(254,215,54)'}}>Add to cart</Text>
 
         </View>
 
@@ -848,14 +855,79 @@ const ProductList = ({route , navigation}) => {
 
   },[])
   return (
-    <View style = {{flex:1 , backgroundColor: 'white', padding: 5}}>
-      <View style = {{ marginTop: height*0.01, marginLeft: width*0.02}}>
-      <TouchableOpacity
+    <View style = {{flex:1 , backgroundColor: 'white'}}>
+
+<View>
+           <LinearGradient colors={['rgb(4,61,50)', 'rgb(16,113,76)']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+            <View style = {{flexDirection:'row',alignItems:'center'}}>
+           <TouchableOpacity
                 onPress={() => navigation.goBack()}
-                style={{ marginTop: height * 0.015, alignItems: 'center', borderWidth: 1, borderRadius: 18, width: width * 0.07 }}
+                style={{ alignItems: 'center', borderWidth: 1, borderRadius: 18, maxHeight:23, width:35, justifyContent:'center', alignItems:'center' , borderColor:'white' , marginTop:5}}
             >
-                <EyeIcon name='arrow-back' size={20} color='black' />
+                <EyeIcon name='arrow-back' size={20} color='white' />
             </TouchableOpacity>
+          <Text style={{ marginLeft: 10, marginTop: 10, fontSize: 20, fontFamily: 'Laila-Bold', color: 'white', textDecorationLine: 'underline' }}>
+            NEOSTORE
+          </Text>
+          </View>
+
+          <View style={{ marginHorizontal: 10, marginTop: 10, flexDirection: 'row', alignItems: 'center', borderWidth: 0.6, borderRadius: 10, overflow: 'hidden' }}>
+            <TextInput
+              placeholder='Search Neostore.com' 
+              style={{ paddingLeft: 10, width: '86%', fontSize: 17, fontFamily: 'Laila-Regular', backgroundColor: 'white' }} 
+              placeholderTextColor={'grey'}
+            />
+            
+            <View style={{ backgroundColor: 'rgb(253,188,112)', height: '100%', width: '14%' }}>
+              <TouchableOpacity>
+                <Image source={require('../images/search.png')} style={{ width: 30, height: 30, justifyContent: 'flex-end', alignContent: 'flex-end', alignItems: 'center', top: 10, left: 10 }} />
+              </TouchableOpacity>
+            </View>
+           
+          </View>
+          </LinearGradient>
+         
+          
+          <View style = {{flexDirection:'row', backgroundColor:'rgb(15,87,73)' , justifyContent:'space-around', paddingTop:5, paddingBottom:5}}>
+
+
+          <Text style={{ fontFamily:'Laila-SemiBold', color:'white'}}>Deals</Text>
+          <Text style={{ fontFamily:'Laila-SemiBold', color:'white'}}>LiveStream</Text>
+          <Text style={{ fontFamily:'Laila-SemiBold', color:'white'}}>Best Sellers</Text>
+
+          </View>
+          <View style = {{flexDirection:'row' , backgroundColor:'rgb(26,121,85)' , paddingLeft:20 , paddingTop:5, paddingBottom:5, alignItems:'center'}}>
+          <Image source={require('../images/map.png')} style = {{ height:18, width:18, tintColor:'white'}}/>
+          <Text style = {{ color:'white', fontFamily:'Laila-Medium', paddingLeft:7 , fontSize:16  }}>Delivery to India</Text>
+          </View>
+          
+        </View>
+      <View style = {{top:2, left:2}}>
+ 
+
+      
+      </View>
+
+      <View style ={{flexDirection:'row', justifyContent:'space-evenly', marginBottom:5, marginTop:5}}>
+      <TouchableOpacity>
+        <Text style = {{borderWidth:0.5, padding:3, textAlign:'center', fontFamily:'Laila-Regular', borderRadius:5}}>Luna</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text style = {{borderWidth:0.5, padding:3, textAlign:'center', fontFamily:'Laila-Regular', borderRadius:5}}>Karlo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text style = {{borderWidth:0.5, padding:3, textAlign:'center', fontFamily:'Laila-Regular',borderRadius:5}}>Leo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text style = {{borderWidth:0.5, padding:3, textAlign:'center', fontFamily:'Laila-Regular', borderRadius:5}}>Producer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text style = {{borderWidth:0.5, padding:3, textAlign:'center', fontFamily:'Laila-Regular', borderRadius:5}}>Uran</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+        <Text style = {{borderWidth:0.5, padding:3, textAlign:'center', fontFamily:'Laila-Regular', borderRadius:5}}>Center</Text>
+        </TouchableOpacity>
+        
       </View>
     
 
